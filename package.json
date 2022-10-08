@@ -16,5 +16,17 @@
   "bugs": {
     "url": "https://github.com/azamSedarat/E-Commerce/issues"
   },
-  "homepage": "https://github.com/azamSedarat/E-Commerce#readme"
+  "type": "module",
+  "homepage": "https://github.com/azamSedarat/E-Commerce#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.1",
+    "pg": "^8.8.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.24.0",
+    "sequelize-cli": "^6.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
 }
