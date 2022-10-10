@@ -4,40 +4,42 @@ import {DataTypes} from "sequlize"
 export default(sequlize)=>{
     sequlize.define(
         "Order",{
-            shippedDate:{
+            shippeddate:{
                 allowNull:DataTypes.STRING
             },
             amount:{
                 allowNull:false,
                 type:DataTypes.INTEGER
             },
-            payment_method:{
+            paymentMethod:{
                 allowNull:false,
-                type: DataTypes.ENUM(["online", "cash"])
+                type: DataTypes.ENUM(["online", "cash","credit"])
 
             },
-            address_id:{
+            address:{
                 allowNull:false,
-                type: DataTypes.INTEGER
-
-            },
-
-            deliverType:{
-                allowNull:false,
-                type:DataTypes.ENUM(["post","dar mahal"])
+                type: DataTypes.STRING
 
             },
             description:{
                 allowNull:true,
                 type:DataTypes.STRING
             },
-            order_date:{
+            orderDate:{
                 allowNull:false,
-                type:DataTypes.STRING
+                type:DataTypes.DATE
             },
-            order_status:{
+            orderStatus:{
                 allowNull:false,
-                type:DataTypes.ENUM(["proccesing","finished"])
+                type:DataTypes.ENUM([
+                    "OrderCancelled",
+                    "OrderDelivered",
+                    "OrderInTransit",
+                    "OrderPaymentDue",
+                    "OrderPickupAvailable",
+                    "OrderProblem",
+                    "OrderProcessing",
+                    "OrderReturned"])
             }
 
 

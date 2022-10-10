@@ -12,9 +12,9 @@ export default(sequlize)=>{
                 allowNull:true,
                 type:DataTypes.INTEGER
             },
-            payment_date:{
+            paymentDate:{
                 allowNull:false,
-                type:DataTypes.STRING
+                type:DataTypes.DATE
             },
             description:{
                 allowNull:true,
@@ -22,7 +22,10 @@ export default(sequlize)=>{
             },
             status:{
                 allowNull:false,
-                type:DataTypes.ENUM(["start","Processing","finished"])
+                type:DataTypes.ENUM(["PaymentComplete",
+                    "PaymentDeclined",
+                    "PaymentDue",
+                    "PaymentPastDue"])
             }
         }
     )
