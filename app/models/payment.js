@@ -4,7 +4,7 @@ import {DataTypes} from "sequlize"
 export default(sequlize)=>{
     sequlize.define(
         "Payment",{
-            refrence_id:{
+            refrenceId:{
                 allowNull:false,
                 type:DataTypes.INTEGER
             },
