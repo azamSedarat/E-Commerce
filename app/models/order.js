@@ -6,7 +6,7 @@ export default(sequlize)=>{
         "Order",{
             shippedDate:{
                 allowNull:false,
-                type:DataTypes.STRING
+                type:DataTypes.DATE
             },
             amount:{
                 allowNull:false,
