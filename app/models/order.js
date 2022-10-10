@@ -4,7 +4,7 @@ import {DataTypes} from "sequlize"
 export default(sequlize)=>{
     sequlize.define(
         "Order",{
-            shippeDdate:{
+            shippedDate:{
                 allowNull:false,
                 type:DataTypes.STRING
             },
