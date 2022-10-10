@@ -1,28 +1,22 @@
 
 import { Sequelize } from "sequelize";
-
-const user = '<postgres user>'
-const host = 'localhost'
-const database = '<postgres db name>'
-const password = '<postgres password>'
-const port = '<postgres port>'
+import {oneToOneRelation, oneToManyRelation, manyToManyRelation} from "./relations.js"
 
 // Connecting to database
-const sequelize = new Sequelize(database, user, password, {
-    host,
-    port,
-    dialect: 'postgres',
-    logging: false,
-    define: {
-        freezeTableName: true
-    }
-  })
-  
+const sequelize = new Sequelize('database', 'username', 'password', {
+  dialect: 'postgres',
+  dialectOptions: {
+    // Your pg options here
+  }
+});
 
-//Synchronizing all models at once
+
+
+// Synchronizing all models at once
 export async function syncDatabase(){
     try {
         await sequelize.sync({ alter: true });
+        console.log("All models were synchronized successfully.");
     } catch (error) {
         throw error
     }
@@ -39,19 +33,23 @@ export async function syncDatabase(){
       }
 })();
 
-// import {default as userModel} from "./user.js"
+import {default as cart} from "./cart.js"
 
 //Model Definition
 const modelDefines = [
-    // userModel,
+    cart
 ]
 for(const modelDefiner of modelDefines){
     modelDefiner(sequelize)
 }
 
 // set associations
-oneToManyRelation(sequelize.models.User, sequelize.models.Quiz)
-superManyToManyRelation(sequelize.models.Quiz, sequelize.models.Question, sequelize.models.QuizItem)
 
+
+// export {sequelize}
 
 export {sequelize}
+
+
+
+
