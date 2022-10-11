@@ -14,7 +14,7 @@ function manyToManyRelation(tableA, tableB, tableC){
     tableB.belongsToMany(tableA, { through: tableC });
 }
 
-export {
+exports = {
     oneToOneRelation,
     oneToManyRelation,
     manyToManyRelation
