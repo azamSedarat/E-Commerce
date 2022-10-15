@@ -2,33 +2,37 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Carts', {
+    await queryInterface.createTable('Comments', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      CustomerId: {
+      productId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Customer',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+          model: {
+            tableName: 'Products',
+          },
+          key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        }
       },
-      OrderId: {
+      customerId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Order',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+          model: {
+            tableName: 'Customers',
+          },
+          key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        }
       },
-      status: {
-        type: Sequelize.ENUM("PaymentProcessing","PaymentProcessing","canceled","closed")
+      insertDate: {
+        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,
@@ -41,6 +45,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Carts');
+    await queryInterface.dropTable('Comments');
   }
 };

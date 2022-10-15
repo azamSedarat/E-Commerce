@@ -12,59 +12,70 @@ module.exports = {
       CustumerId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Customers', 
-          key: 'id'
-        }},
+          model: {
+            tableName: 'Customers',
+          },
+          key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        }
+      },
         AddressId: {
           type: Sequelize.INTEGER,
           references: {
-            model: 'Address',
-            key: 'id'
-          },
-          onUpdate: 'CASCADE',
-          onDelete: 'CASCADE',
+            model: {
+              tableName: 'Addresses',
+            },
+            key: 'id',
+            onUpdate: 'CASCADE',
+            onDelete: 'CASCADE'
+          }
         },
         CartId: {
           type: Sequelize.INTEGER,
           references: {
-            model: 'Cart',
-            key: 'id'
-          },
-          onUpdate: 'CASCADE',
-          onDelete: 'CASCADE',
+            model: {
+              tableName: 'Carts',
+            },
+            key: 'id',
+            onUpdate: 'CASCADE',
+            onDelete: 'CASCADE'
+          }
         },
         PaymentId: {
           type: Sequelize.INTEGER,
           references: {
-            model: 'Payment',
-            key: 'id'
-          },
-          onUpdate: 'CASCADE',
-          onDelete: 'CASCADE',
+            model: {
+              tableName: 'Payments',
+            },
+            key: 'id',
+            onUpdate: 'CASCADE',
+            onDelete: 'CASCADE'
+          }
         },
       shippedDate: {
         type: Sequelize.DATE
       },
       amount:{
         allowNull:false,
-        type:DataTypes.INTEGER
+        type:Sequelize.INTEGER
     },
       paymentMethod:{
         allowNull:false,
-        type: DataTypes.ENUM(["online", "cash","credit"])
+        type: Sequelize.ENUM(["online", "cash","credit"])
 
     },
     description:{
         allowNull:true,
-        type:DataTypes.STRING
+        type:Sequelize.STRING
     },
     orderDate:{
         allowNull:false,
-        type:DataTypes.DATE
+        type:Sequelize.DATE
     },
     orderStatus:{
         allowNull:false,
-        type:DataTypes.ENUM([
+        type:Sequelize.ENUM([
             "OrderCancelled",
             "OrderDelivered",
             "OrderInTransit",

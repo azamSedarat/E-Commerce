@@ -12,27 +12,29 @@ module.exports = {
       CustumerId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'customers', 
-          key: 'id'
-        }},
-      refrenceId: {
-        type: Sequelize.INTEGER
+          model: {
+            tableName: 'Customers',
+          },
+          key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        }
       },
       amount:{
         allowNull:true,
-        type:DataTypes.INTEGER
+        type:Sequelize.INTEGER
     },
     paymentDate:{
         allowNull:false,
-        type:DataTypes.DATE
+        type:Sequelize.DATE
     },
     description:{
         allowNull:true,
-        type:DataTypes.STRING
+        type:Sequelize.STRING
     },
     status:{
         allowNull:false,
-        type:DataTypes.ENUM(["PaymentComplete",
+        type:Sequelize.ENUM(["PaymentComplete",
             "PaymentDeclined",
             "PaymentDue",
             "PaymentPastDue"])
