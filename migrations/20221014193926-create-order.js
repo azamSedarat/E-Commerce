@@ -9,15 +9,41 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      custumerId: {
+      CustumerId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'customers', 
+          model: 'Customers', 
           key: 'id'
         }},
-    
+        AddressId: {
+          type: Sequelize.INTEGER,
+          references: {
+            model: 'Address',
+            key: 'id'
+          },
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE',
+        },
+        CartId: {
+          type: Sequelize.INTEGER,
+          references: {
+            model: 'Cart',
+            key: 'id'
+          },
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE',
+        },
+        PaymentId: {
+          type: Sequelize.INTEGER,
+          references: {
+            model: 'Payment',
+            key: 'id'
+          },
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE',
+        },
       shippedDate: {
-        type: Sequelize.STRING
+        type: Sequelize.DATE
       },
       amount:{
         allowNull:false,
@@ -26,11 +52,6 @@ module.exports = {
       paymentMethod:{
         allowNull:false,
         type: DataTypes.ENUM(["online", "cash","credit"])
-
-    },
-     address:{
-        allowNull:false,
-        type: DataTypes.STRING
 
     },
     description:{

@@ -10,11 +10,13 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Order.belongsTo(models.Customer)
+      Payment.belongsTo(models.Customer),
+      Payment.belongsTo(models.Order)
     }
   }
   Payment.init({
-    refrenceId: DataTypes.INTEGER
+    refrenceId: DataTypes.INTEGER,
+    paymentDate: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Payment',

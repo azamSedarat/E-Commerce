@@ -2,27 +2,35 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Categories', {
+    await queryInterface.createTable('Customers', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      credit: {
+        type: Sequelize.INTEGER,
+        defultValue: 0
+      },
+      paybackType: {
+        type: Sequelize.ENUM("Deposit to wallet","Deposit to bank account."),
+      },
+      job: {
         type: Sequelize.STRING
       },
-      description: {
+      customerType: {
+        type: Sequelize.ENUM("person","company"),
+        defaultValue:"person"
+      },
+      companyName: {
         type: Sequelize.STRING
       },
-      superCategory: {
-        type: Sequelize.STRING,
-        references: {
-          model: 'Category',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+      financialNumber: {
+        type: Sequelize.INTEGER
+      },
+      registerIdentity: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -35,6 +43,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Categories');
+    await queryInterface.dropTable('Customers');
   }
 };

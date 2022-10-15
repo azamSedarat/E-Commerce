@@ -12,7 +12,7 @@ module.exports = {
       CartId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Carts', 
+          model: 'Cart', 
           key: 'id'
         },
         
@@ -22,7 +22,7 @@ module.exports = {
       ProductId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Products',
+          model: 'Product',
           key: 'id'
         },
         onUpdate: 'CASCADE',

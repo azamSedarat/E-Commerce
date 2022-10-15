@@ -9,17 +9,26 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      UserId: {
+      CustomerId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Users',
+          model: 'Customer',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      OrderId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Order',
           key: 'id'
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
       status: {
-        type: Sequelize.INTEGER
+        type: Sequelize.ENUM("PaymentProcessing","PaymentProcessing","canceled","closed")
       },
       createdAt: {
         allowNull: false,

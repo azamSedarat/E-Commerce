@@ -10,11 +10,14 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-     Order.belongsTo(models.Customer)
+     Order.belongsTo(models.Customer),
+     Order.hasOne(models.Address),
+     Order.belongsTo(models.Cart),
+     Order.hasOne(models.Payment)
     }
   }
   Order.init({
-    shippedDate: DataTypes.STRING,
+    shippedDate: DataTypes.DATE,
     amount:{
       allowNull:false,
       type:DataTypes.INTEGER
@@ -22,11 +25,6 @@ module.exports = (sequelize, DataTypes) => {
   paymentMethod:{
       allowNull:false,
       type: DataTypes.ENUM(["online", "cash","credit"])
-
-  },
-  address:{
-      allowNull:false,
-      type: DataTypes.STRING
 
   },
   description:{
