@@ -4,9 +4,8 @@ const {
 } = require('sequelize');
 const {User} = sequelize.models
 module.exports = (sequelize, DataTypes) => {
-  class Seller extends Model {
+  class Seller extends User {
     static associate(models) {
-      Seller.belongsTo(models.User)
       Seller.belongsToMany(models.Product, {through: 'ProductSeller'}),
       Seller.hasMany(models.WithDraw)
     }
