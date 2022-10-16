@@ -16,13 +16,12 @@ module.exports = {
         type: Sequelize.STRING
       },
       superCategory: {
-        type: Sequelize.STRING,
-        unique:true,
+        type: Sequelize.INTEGER,
         references: {
           model: {
             tableName: 'Categories',
           },
-          key: 'superCategory',
+          key: 'id',
           onUpdate: 'CASCADE',
           onDelete: 'CASCADE'
         }
