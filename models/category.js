@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
   Category.init({
     name: DataTypes.STRING,
     description: DataTypes.STRING,
-    superCategory: DataTypes.STRING
+    superCategory: DataTypes.STRING,
+    feature: DataTypes.ARRAY(DataTypes.STRING)
   }, {
     sequelize,
     modelName: 'Category',

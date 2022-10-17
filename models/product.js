@@ -13,8 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Product.belongsTo(models.Category),
       Product.hasMany(models.ProductFeatures),
-      Product.hasMany(models.Comment),
-      Product.belongsToMany(models.Cart, {through: 'CartItems'}),
+      Product.hasMany(models.Comment),   
       Product.belongsToMany(models.FavoriteList),
       Product.belongsToMany(models.Seller, {through: 'ProductSeller'})
     }
