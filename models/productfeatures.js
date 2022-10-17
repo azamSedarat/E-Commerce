@@ -12,10 +12,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       ProductFeatures.belongsTo(models.Product)
+      ProductFeatures.belongsToMany(models.Cart, {through: 'CartItems'}),
     }
   }
   ProductFeatures.init({
-    feature: DataTypes.STRING,
+    feature: DataTypes.JSONB,
     price: DataTypes.INTEGER,
     photo: DataTypes.STRING,
     stock: DataTypes.INTEGER

@@ -21,7 +21,7 @@ module.exports = {
         }
       },
       feature: {
-        type: Sequelize.STRING
+        type: Sequelize.JSONB
       },
       price: {
         type: Sequelize.INTEGER
