@@ -2,7 +2,6 @@
 const {
   Model
 } = require('sequelize');
-const {User} = sequelize.models
 module.exports = (sequelize, DataTypes) => {
   class Customer extends Model {
     static associate(models) {
