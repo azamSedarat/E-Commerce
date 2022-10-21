@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Address.belongsTo(models.User),
-      Address.belongsToMany(models.Order)
+      Address.belongsTo(models.Order)
     }
   }
   Address.init({
