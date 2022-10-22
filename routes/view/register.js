@@ -6,14 +6,14 @@ const {check} = require("express-validator");
 const router = express.Router()
 
 
-router.route("/login-form")
-    .get(authTemplate.loginForm.get)
+router.route("/register")
+    .get(authTemplate.registerForm.get)
     .post(validate([
         check("username").not().isEmpty().withMessage("username field required!"),
         check("password").not().isEmpty().withMessage("password field required!")
-    ]),authTemplate.loginForm.post)
+    ]),authTemplate.registerForm.post)
 
-router.get("/logout", authTemplate.logout)
+
 
 
 module.exports = router;

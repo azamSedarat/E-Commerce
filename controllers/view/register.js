@@ -2,9 +2,9 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const db = require("../../models")
 
-const loginForm = {
+const registerForm = {
     get: async(req, res) => {
-        return res.render("login.pug", {req})
+        return res.render("register", {req})
     },
     post: async(req, res) => {
         try {
@@ -13,10 +13,15 @@ const loginForm = {
                     username: req.body.username
                 }
             })
+            
             if(!user){
-                return res.render("error", { errors: ["hamchin useri nadarim"] })
-            }
-            const validPassword = await bcrypt.compare(req.body.password, user.password);
+            const createuser = await db.User.create({
+                email:req.body.email,
+                password:req.body.username,
+                username:req.body.password
+            })
+        }
+            const validPassword = await bcrypt.compare(req.body.password, createuser.password);
     
             if(validPassword){
                 const token = jwt.sign({ username: user.username }, process.env.SECRET_KEY, { expiresIn: 60 * 60 }, { algorithm: 'HS256' });
@@ -32,14 +37,7 @@ const loginForm = {
     }
 }
 
-const logout = async(req, res) => {
-    res.clearCookie("access-token");
-    return res.render("index", { req })
-
-}
-
 
 module.exports = {
-    loginForm,
-    logout
+    registerForm
 }
