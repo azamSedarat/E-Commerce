@@ -1,0 +1,1 @@
+exports.productViewAPI = require("./view/productDetails")
