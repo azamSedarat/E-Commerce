@@ -1,7 +1,7 @@
 const path = require("path")
 const db = require("./models/index")
 const express = require('express')
-const app = express();
+const app = require("./routes");
 const dotenv = require('dotenv')
 dotenv.config()
 const PORT = process.env.PORT;
