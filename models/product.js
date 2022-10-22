@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       Product.belongsTo(models.Category),
       Product.hasMany(models.ProductFeatures),
       Product.hasMany(models.Comment),   
-      Product.belongsTo(models.FavoriteList),
+      Product.belongsToMany(models.FavoriteList, {through: 'favoriteProduct'}),
       Product.belongsToMany(models.Seller, {through: 'ProductSeller'})
     }
   }

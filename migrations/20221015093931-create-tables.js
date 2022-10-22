@@ -222,7 +222,7 @@ module.exports = {
           },
         },
         feature: {
-          type: Sequelize.ARRAY(Sequelize.STRING),
+          type: Sequelize.JSONB
         },
         createdAt: {
           allowNull: false,
@@ -279,6 +279,34 @@ module.exports = {
           references: {
             model: {
               tableName: 'Customers',
+            },
+            key: 'id',
+            onUpdate: 'CASCADE',
+            onDelete: 'CASCADE'
+          }
+        },
+        createdAt: {
+          allowNull: false,
+          type: Sequelize.DATE
+        },
+        updatedAt: {
+          allowNull: false,
+          type: Sequelize.DATE
+        }
+      });
+      // create table favoreiteProduct
+      await queryInterface.createTable('favoriteProducts', {
+        id: {
+          allowNull: false,
+          autoIncrement: true,
+          primaryKey: true,
+          type: Sequelize.INTEGER
+        },
+        FavoriteListId: {
+          type: Sequelize.INTEGER,
+          references: {
+            model: {
+              tableName: 'favoriteLists',
             },
             key: 'id',
             onUpdate: 'CASCADE',
@@ -362,7 +390,7 @@ module.exports = {
           primaryKey: true,
           type: Sequelize.INTEGER
         },
-        productId: {
+        ProductId: {
           type: Sequelize.INTEGER,
           references: {
             model: {
