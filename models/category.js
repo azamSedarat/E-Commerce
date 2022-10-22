@@ -18,7 +18,8 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     description: DataTypes.STRING,
     superCategory: DataTypes.STRING,
-    feature:DataTypes.ARRAY(DataTypes.STRING)
+    feature:DataTypes.ARRAY(DataTypes.STRING),
+    varientFeature:DataTypes.ARRAY(DataTypes.STRING)
   }, {
     sequelize,
     modelName: 'Category',

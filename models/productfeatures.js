@@ -11,10 +11,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   ProductFeatures.init({
-    feature: DataTypes.JSONB,
+    varientFeature: DataTypes.JSONB,
     price: DataTypes.INTEGER,
     photo: DataTypes.STRING,
-    stock: DataTypes.INTEGER
+    stock: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'ProductFeatures',

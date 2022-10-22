@@ -8,13 +8,13 @@ const getProductDetails= async(req, res) => {
             }
         })
         const product_features = await product.getProductFeatures();
-        const category_features = await db.Category.findOne({
+        const category = await db.Category.findOne({
             where: {
               id: product.CategoryId
-            },
-            attributes : ["feature"]
+            }
         })
-        res.render("productDetails", {product, product_features, category_features, req})
+
+        res.render("productDetails", {product, product_features, category, req})
     } catch (error) {
         
         res.send(error.message)

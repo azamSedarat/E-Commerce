@@ -14,7 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Product.init({
-    name: DataTypes.STRING
+    name: DataTypes.STRING,
+    feature: DataTypes.JSONB,
   }, {
     sequelize,
     modelName: 'Product',

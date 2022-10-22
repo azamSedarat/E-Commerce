@@ -208,7 +208,7 @@ module.exports = {
           type: Sequelize.STRING,
         },
         description: {
-          type: Sequelize.STRING,
+          type: Sequelize.TEXT,
         },
         superCategory: {
           type: Sequelize.INTEGER,
@@ -222,6 +222,9 @@ module.exports = {
           },
         },
         feature: {
+          type: Sequelize.ARRAY(Sequelize.STRING)
+        },
+        varientFeature: {
           type: Sequelize.ARRAY(Sequelize.STRING)
         },
         createdAt: {
@@ -244,6 +247,9 @@ module.exports = {
         },
         name: {
           type: Sequelize.STRING
+        },
+        feature: {
+          type: Sequelize.JSONB
         },
         CategoryId: {
           type: Sequelize.INTEGER,
@@ -401,7 +407,7 @@ module.exports = {
             onDelete: 'CASCADE'
           }
         },
-        feature: {
+        varientFeature: {
           type: Sequelize.JSONB
         },
         price: {
