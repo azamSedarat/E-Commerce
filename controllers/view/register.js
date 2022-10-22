@@ -15,22 +15,14 @@ const registerForm = {
             })
             
             if(!user){
+            passwordhash = await bcrypt.hash(req.password, salt);
             const createuser = await db.User.create({
                 email:req.body.email,
-                password:req.body.username,
+                password:passwordhash,
                 username:req.body.password
             })
         }
-            const validPassword = await bcrypt.compare(req.body.password, createuser.password);
-    
-            if(validPassword){
-                const token = jwt.sign({ username: user.username }, process.env.SECRET_KEY, { expiresIn: 60 * 60 }, { algorithm: 'HS256' });
-                res.cookie("access-token", token, { maxAge: 60 * 60 * 1000})
-                return res.redirect("/")
-            }else{
-                return res.render("error", { errors: ["pass ghalate"] })
-            }
-            
+        
         } catch (error) {
             return res.render("error", { errors: error.message })
         }
