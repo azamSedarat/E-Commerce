@@ -1,11 +1,16 @@
 <!DOCTYPE html>
+//- product, product_features, category_features, req}
 <html>
   <head>
     <title>chat with </title>
   </head>
   <body>
     <ul id="product">
-       li= `${detail}`
+        li= `${product.name}`
+        each val in product_features
+          li= val.id 
+        each val in category_features.feature
+           li= val.key
     </ul>
   </body>
 </html>

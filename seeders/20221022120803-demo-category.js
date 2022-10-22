@@ -6,7 +6,7 @@ module.exports = {
     return queryInterface.bulkInsert('Categories', [{
       name: 'mobile',
       description: 'samsung',
-      feature:'{"color": null, "size": null}',
+      feature:["color", "size"],
       createdAt: new Date(),
       updatedAt: new Date()
     }]);

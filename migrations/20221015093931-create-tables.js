@@ -222,7 +222,7 @@ module.exports = {
           },
         },
         feature: {
-          type: Sequelize.JSONB
+          type: Sequelize.ARRAY(Sequelize.STRING)
         },
         createdAt: {
           allowNull: false,
