@@ -14,6 +14,7 @@ const routeAPIDefiner = [
 
 const routeViewsDefiner = [
     ["/view", require("./view/register")],
+    ["/auth", require("./view/login")],
     ["/product", require("./view/productDetails")]
 ]
 
