@@ -8,23 +8,27 @@ const registerForm = {
     },
     post: async(req, res) => {
         try {
+            
             const user = await db.User.findOne({
                 where: {
                     userName: req.body.username
                 }
             })
-            
+            console.log(user)
             if(!user){
-            passwordhash = await bcrypt.hash(req.body.password, 10)
-            await db.User.create({
-                email:req.body.email,
-                password:passwordhash,
-                userName:req.body.username,
-                userRole:"customer"
+                passwordhash = await bcrypt.hash(req.body.password, 10)
+                await db.User.create({
+                    email:req.body.email,
+                    password:passwordhash,
+                    userName:req.body.username,
+                    userRole:"customer"
 
-            })
-            res.render("login.pug",{req})
-        }
+                })
+                res.render("login.pug",{req})
+            }
+            else{
+                return res.render("login.pug",{req})
+            }
         
         } catch (error) {
             return res.send(error.message)
