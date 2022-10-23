@@ -10,23 +10,24 @@ const registerForm = {
         try {
             const user = await db.User.findOne({
                 where: {
-                    username: req.body.username
+                    userName: req.body.username
                 }
             })
             
             if(!user){
-            passwordhash = await bcrypt.hash(req.body.password, salt);
-            const createuser = await db.User.create({
+            passwordhash = await bcrypt.hash(req.body.password, 10)
+            await db.User.create({
                 email:req.body.email,
                 password:passwordhash,
-                username:req.body.password,
+                userName:req.body.username,
                 userRole:"customer"
 
             })
+            res.render("login.pug",{req})
         }
         
         } catch (error) {
-            return res.render("error", { errors: error.message })
+            return res.send(error.message)
         }
     }
 }
