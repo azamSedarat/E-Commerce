@@ -8,13 +8,12 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       ProductFeatures.belongsTo(models.Product),
       ProductFeatures.belongsToMany(models.Cart, {through: 'CartItems'})
+      ProductFeatures.belongsToMany(models.Seller, {through: 'ProductSeller'})
     }
   }
   ProductFeatures.init({
     varientFeature: DataTypes.JSONB,
-    price: DataTypes.INTEGER,
     photo: DataTypes.STRING,
-    stock: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'ProductFeatures',

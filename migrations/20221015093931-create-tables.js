@@ -171,6 +171,9 @@ module.exports = {
             onDelete: 'CASCADE'
           }
         },
+        qualify :{
+          type: Sequelize.INTEGER
+        },
         sellerType: {
           type: Sequelize.ENUM("person","store")
         },
@@ -246,6 +249,9 @@ module.exports = {
           type: Sequelize.INTEGER
         },
         name: {
+          type: Sequelize.STRING
+        },
+        EnName: {
           type: Sequelize.STRING
         },
         feature: {
@@ -410,14 +416,8 @@ module.exports = {
         varientFeature: {
           type: Sequelize.JSONB
         },
-        price: {
-          type: Sequelize.INTEGER
-        },
         photo: {
           type: Sequelize.STRING
-        },
-        stock: {
-          type: Sequelize.INTEGER
         },
         createdAt: {
           allowNull: false,
@@ -459,8 +459,14 @@ module.exports = {
             onDelete: 'CASCADE'
           }
         },
-        quantity:{
+        warranty: {
+          type: Sequelize.STRING
+        },
+        price:{
           type : Sequelize.INTEGER
+        },
+        stock: {
+          type: Sequelize.INTEGER
         },
         createdAt: {
           allowNull: false,
