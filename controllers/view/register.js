@@ -15,11 +15,13 @@ const registerForm = {
             })
             
             if(!user){
-            passwordhash = await bcrypt.hash(req.password, salt);
+            passwordhash = await bcrypt.hash(req.body.password, salt);
             const createuser = await db.User.create({
                 email:req.body.email,
                 password:passwordhash,
-                username:req.body.password
+                username:req.body.password,
+                userRole:"customer"
+
             })
         }
         
