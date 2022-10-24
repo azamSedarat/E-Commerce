@@ -418,6 +418,7 @@ module.exports = {
           references: {
             model: {
               tableName: 'Products',
+              as : "features"
             },
             key: 'id',
             onUpdate: 'CASCADE',

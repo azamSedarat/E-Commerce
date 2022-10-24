@@ -16,7 +16,6 @@ const getProductDetails= async(req, res) => {
             })
             
         const category = await db.Category.findByPk(product.CategoryId, {attributes :["name"]})
-        
         res.render("productDetails", {product,category})
     } catch (error) {
         
