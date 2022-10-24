@@ -9,12 +9,13 @@ module.exports = (sequelize, DataTypes) => {
       Product.belongsTo(models.Category),
       Product.hasMany(models.ProductFeatures),
       Product.hasMany(models.Comment),   
-      Product.belongsTo(models.FavoriteList),
+      Product.hasMany(models.FavoriteList),
       Product.belongsToMany(models.Seller, {through: 'ProductSeller'})
     }
   }
   Product.init({
-    name: DataTypes.STRING
+    name: DataTypes.STRING,
+    
   }, {
     sequelize,
     modelName: 'Product',
