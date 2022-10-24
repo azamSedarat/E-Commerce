@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class Seller extends Model {
     static associate(models) {
       Seller.belongsTo(models.User)
-      Seller.belongsToMany(models.ProductFeatures, {through: 'ProductSeller'}),
+      Seller.belongsToMany(models.ProductFeature, {through: 'ProductSeller'}),
       Seller.hasMany(models.WithDraw)
     }
   }

@@ -11,13 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Category.hasMany(models.Product),
-      Category.belongsTo(Category, {foreignKey: 'superCategory'})
+      Category.belongsTo(Category, { foreignKey: 'parentId', as: 'Parent' }); 
     }
   }
   Category.init({
     name: DataTypes.STRING,
     description: DataTypes.STRING,
-    superCategory: DataTypes.STRING,
+    parentId: DataTypes.INTEGER, 
     feature:DataTypes.ARRAY(DataTypes.STRING),
     varientFeature:DataTypes.ARRAY(DataTypes.STRING)
   }, {

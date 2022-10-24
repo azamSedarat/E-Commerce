@@ -2,12 +2,11 @@
 const {
   Model
 } = require('sequelize');
-const productfeatures = require('./productfeatures');
 module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
     static associate(models) {
       Product.belongsTo(models.Category),
-      Product.hasMany(models.ProductFeatures),
+      Product.hasMany(models.ProductFeature),
       Product.hasMany(models.Comment),   
       Product.belongsToMany(models.FavoriteList, {through: 'favoriteProduct'})
     }
@@ -16,6 +15,9 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     EnName: DataTypes.STRING,
     feature: DataTypes.JSONB,
+    review: DataTypes.TEXT,
+    expertReview: DataTypes.TEXT,
+    generalFeatures: DataTypes.JSONB
   }, {
     sequelize,
     modelName: 'Product',

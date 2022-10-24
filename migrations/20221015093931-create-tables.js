@@ -199,7 +199,9 @@ module.exports = {
         }
       });
 
-      // create table category
+
+      // create table Category
+
       await queryInterface.createTable("Categories", {
         id: {
           allowNull: false,
@@ -210,19 +212,19 @@ module.exports = {
         name: {
           type: Sequelize.STRING,
         },
-        description: {
-          type: Sequelize.TEXT,
-        },
-        superCategory: {
+        parentId : {
           type: Sequelize.INTEGER,
           references: {
             model: {
-              tableName: "Categories",
+              tableName: 'Categories',
             },
-            key: "id",
-            onUpdate: "CASCADE",
-            onDelete: "CASCADE",
-          },
+            key: 'id',
+            onUpdate: 'CASCADE',
+            onDelete: 'CASCADE'
+          }
+        },
+        description: {
+          type: Sequelize.TEXT,
         },
         feature: {
           type: Sequelize.ARRAY(Sequelize.STRING)
@@ -267,6 +269,15 @@ module.exports = {
             onUpdate: 'CASCADE',
             onDelete: 'CASCADE'
           }
+        },
+        review: {
+          type: Sequelize.TEXT
+        },
+        expertReview: {
+          type: Sequelize.TEXT
+        },
+        generalFeatures: {
+          type: Sequelize.JSONB
         },
         createdAt: {
           allowNull: false,
@@ -437,7 +448,7 @@ module.exports = {
           primaryKey: true,
           type: Sequelize.INTEGER
         },
-        ProductFeaturesId: {
+        ProductFeatureId: {
           type: Sequelize.INTEGER,
           references: {
             model: {
@@ -564,7 +575,7 @@ module.exports = {
             onDelete: 'CASCADE'
           }
         },
-        ProductFeaturesId: {
+        ProductFeatureId: {
           type: Sequelize.INTEGER,
           references: {
             model: {
@@ -596,7 +607,7 @@ module.exports = {
           primaryKey: true,
           type: Sequelize.INTEGER
         },
-        ProductFeaturesId: {
+        ProductFeatureId: {
           type: Sequelize.INTEGER,
           references: {
             model: {

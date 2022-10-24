@@ -4,16 +4,16 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('ProductSellers', [{
-      ProductFeaturesId : 1,
+      ProductFeatureId : 1,
       SellerId : 1,
-      warranty:'ارانتی ۱۸ ماهه دیجی کالا + بیمه ۱۲ ماهه تجهیزات الکترونیک',
+      warranty:'گارانتی ۱۸ ماهه نور + بیمه ۱۲ ماهه تجهیزات الکترونیک',
       price: 6279000,
       stock: 5,
       createdAt: new Date(),
       updatedAt: new Date()
     },
     {
-      ProductFeaturesId : 2,
+      ProductFeatureId : 2,
       SellerId : 1,
       warranty:'گارانتی ۱۸ ماهه دیجی کالا + بیمه ۱۲ ماهه تجهیزات الکترونیک',
       price: 6299000,
@@ -22,7 +22,7 @@ module.exports = {
       updatedAt: new Date()
     },
     {
-      ProductFeaturesId : 2,
+      ProductFeatureId : 2,
       SellerId : 2,
       warranty:'گارانتی ۱۸ ماهه ',
       price: 7300000,
@@ -31,7 +31,7 @@ module.exports = {
       updatedAt: new Date()
     },
     {
-      ProductFeaturesId : 3,
+      ProductFeatureId : 3,
       SellerId : 1,
       price: 6319000,
       warranty:'گارانتی ۱۸ ماهه دیجی کالا + بیمه ۱۲ ماهه تجهیزات الکترونیک',
@@ -40,7 +40,7 @@ module.exports = {
       updatedAt: new Date()
     },
     {
-      ProductFeaturesId : 4,
+      ProductFeatureId : 4,
       SellerId : 1,
       price: 6499000,
       warranty:'گارانتی ۱۸ ماهه مایکروتل',
@@ -49,7 +49,7 @@ module.exports = {
       updatedAt: new Date()
     },
     {
-      ProductFeaturesId : 5,
+      ProductFeatureId : 5,
       SellerId : 2,
       price: 8150000,
       warranty:'گارانتی ۱۸ ماهه توسعه اقتصاد توان یاسین (پرهان)',
@@ -58,7 +58,7 @@ module.exports = {
       updatedAt: new Date()
     },
     {
-      ProductFeaturesId : 6,
+      ProductFeatureId : 6,
       SellerId : 2,
       price: 8230000,
       warranty:'گارانتی ۱۸ ماهه پارسه پیشتاز ونداد پرداز',
@@ -67,7 +67,7 @@ module.exports = {
       updatedAt: new Date()
     },
     {
-      ProductFeaturesId : 7,
+      ProductFeatureId : 7,
       SellerId : 1,
       price: 8200000,
       warranty:'گارانتی ۱۸ ماهه پارسه پیشتاز ونداد پرداز',
