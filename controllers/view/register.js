@@ -2,44 +2,41 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const db = require("../../models")
 
-const loginForm = {
+const registerForm = {
     get: async(req, res) => {
-        return res.render("login.pug", {req})
+        return res.render("register", {req})
     },
     post: async(req, res) => {
         try {
+            
             const user = await db.User.findOne({
                 where: {
-                    username: req.body.username
+                    userName: req.body.username
                 }
             })
+            console.log(user)
             if(!user){
-                return res.render("error", { errors: ["hamchin useri nadarim"] })
+                passwordhash = await bcrypt.hash(req.body.password, 10)
+                await db.User.create({
+                    email:req.body.email,
+                    password:passwordhash,
+                    userName:req.body.username,
+                    userRole:"customer"
+
+                })
+                res.render("login.pug",{req})
             }
-            const validPassword = await bcrypt.compare(req.body.password, user.password);
-    
-            if(validPassword){
-                const token = jwt.sign({ username: user.username }, process.env.SECRET_KEY, { expiresIn: 60 * 60 }, { algorithm: 'HS256' });
-                res.cookie("access-token", token, { maxAge: 60 * 60 * 1000})
-                return res.redirect("/")
-            }else{
-                return res.render("error", { errors: ["pass ghalate"] })
+            else{
+                return res.render("login.pug",{req})
             }
-            
+        
         } catch (error) {
-            return res.render("error", { errors: error.message })
+            return res.send(error.message)
         }
     }
 }
 
-const logout = async(req, res) => {
-    res.clearCookie("access-token");
-    return res.render("index", { req })
-
-}
-
 
 module.exports = {
-    loginForm,
-    logout
+    registerForm
 }
