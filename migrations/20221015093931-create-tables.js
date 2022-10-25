@@ -365,45 +365,51 @@ module.exports = {
           primaryKey: true,
           type: Sequelize.INTEGER
         },
-        CustumerId: {
+        UserId: {
           type: Sequelize.INTEGER,
           references: {
             model: {
-              tableName: 'Customers',
+              tableName: 'Users',
             },
             key: 'id',
             onUpdate: 'CASCADE',
             onDelete: 'CASCADE'
           }
         },
+        ID:{
+          type:Sequelize.STRING
+        },
+        link: {
+          type:Sequelize.STRING
+        },
         amount:{
           allowNull:true,
           type:Sequelize.INTEGER
-      },
-      paymentDate:{
-          allowNull:false,
-          type:Sequelize.DATE
-      },
-      description:{
-          allowNull:true,
-          type:Sequelize.STRING
-      },
-      status:{
-          allowNull:false,
-          type:Sequelize.ENUM(["PaymentComplete",
-              "PaymentDeclined",
-              "PaymentDue",
-              "PaymentPastDue"])
-      },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE
         },
-        updatedAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        }
-      });
+        paymentDate:{
+            allowNull:false,
+            type:Sequelize.DATE
+        },
+        description:{
+            allowNull:true,
+            type:Sequelize.STRING
+        },
+        status:{
+            allowNull:true,
+            type:Sequelize.ENUM(["PaymentComplete",
+                "PaymentDeclined",
+                "PaymentDue",
+                "PaymentPastDue"])
+        },
+          createdAt: {
+            allowNull: false,
+            type: Sequelize.DATE
+          },
+          updatedAt: {
+            allowNull: false,
+            type: Sequelize.DATE
+          }
+        });
 
       // create table productFeatures
       await queryInterface.createTable('ProductFeatures', {
