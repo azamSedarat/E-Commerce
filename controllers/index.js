@@ -8,6 +8,6 @@ exports.checkoutAPI = require("./api/checkout")
 
 exports.checkoutCallbackAPI = require("./api/checkoutCallback")
 
-exports.addToCartAPI = require("./api/addItemToCart")
+exports.addItemToCartAPI = require("./api/addItemToCart")
 
-exports.getCartAPI = require("./api/getCard")
+exports.getCartAPI = require("./view/getCart")

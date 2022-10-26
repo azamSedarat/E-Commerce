@@ -1,5 +1,4 @@
-const cartRouter = require("router");
- async(req, res) => {
+const addItem = async(req, res) => {
     const owner = req.user.username;
     const { productId, quantity } = req.body;
     try {
@@ -43,4 +42,8 @@ const cartRouter = require("router");
         console.log(error);
         res.status(500).send("something went wrong");
     }
-});
+}
+
+module.exports = {
+    addItem
+  }

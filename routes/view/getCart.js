@@ -1,7 +1,7 @@
 const express = require("express");
-const  { addToCartAPI } = require('../../controllers');
+const  { getCartAPI } = require('../../controllers');
 const router = express.Router()
 
-router.get("/itemList", Auth, addToCartAPI.getCart)
+router.get("/cartItems", Auth, getCartAPI.getCart)
 
 module.exports = router;

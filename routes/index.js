@@ -20,7 +20,7 @@ const routeViewsDefiner = [
     ["/auth", require("./view/register")],
     ["/checkout", require("./api/checkout")],
     ["/checkout", require("./api/checkout")],
-    ["/cart", require("./api/addToCart")],
+    ["/cart", require("./api/addToCart")]
     ["/cart", require("./view/getCart")]
 ]
 
