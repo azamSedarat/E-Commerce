@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'WithDraw',
+    timestamps: false
   });
   return WithDraw;
 };

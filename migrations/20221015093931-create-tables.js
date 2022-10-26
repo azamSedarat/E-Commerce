@@ -42,14 +42,6 @@ module.exports = {
       },
       birthDay: {
         type: Sequelize.DATE
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
       }
     });
 
@@ -89,14 +81,6 @@ module.exports = {
           onUpdate: 'CASCADE',
           onDelete: 'CASCADE'
         }
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
       }
     });
 
@@ -141,14 +125,6 @@ module.exports = {
         },
         registerIdentity: {
           type: Sequelize.INTEGER
-        },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        },
-        updatedAt: {
-          allowNull: false,
-          type: Sequelize.DATE
         }
       });
 
@@ -188,14 +164,6 @@ module.exports = {
         },
         ibanNumber: {
           type: Sequelize.STRING
-        },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        },
-        updatedAt: {
-          allowNull: false,
-          type: Sequelize.DATE
         }
       });
 
@@ -231,15 +199,7 @@ module.exports = {
         },
         varientFeature: {
           type: Sequelize.ARRAY(Sequelize.STRING)
-        },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE,
-        },
-        updatedAt: {
-          allowNull: false,
-          type: Sequelize.DATE,
-        },
+        }
       });
 
       // create table product
@@ -278,14 +238,6 @@ module.exports = {
         },
         generalFeatures: {
           type: Sequelize.JSONB
-        },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        },
-        updatedAt: {
-          allowNull: false,
-          type: Sequelize.DATE
         }
       });
 
@@ -307,14 +259,6 @@ module.exports = {
             onUpdate: 'CASCADE',
             onDelete: 'CASCADE'
           }
-        },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        },
-        updatedAt: {
-          allowNull: false,
-          type: Sequelize.DATE
         }
       });
       // create table favoreiteProduct
@@ -346,14 +290,6 @@ module.exports = {
             onUpdate: 'CASCADE',
             onDelete: 'CASCADE'
           }
-        },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        },
-        updatedAt: {
-          allowNull: false,
-          type: Sequelize.DATE
         }
       });
 
@@ -365,45 +301,63 @@ module.exports = {
           primaryKey: true,
           type: Sequelize.INTEGER
         },
-        CustumerId: {
+        status:{
+          allowNull:true,
+          type:Sequelize.ENUM([
+            1 = "پرداخت انجام نشده است",
+            2 = "پرداخت ناموفق بوده است",
+            3 = "خطا رخ داده است",
+            4 = "بلوکه شده",
+            5 = "برگشت به پرداخت کننده",
+            6 = "برگشت خورده سیستمی",
+            7 = "انصراف از پرداخت",
+            8 = "به درگاه پرداخت منتقل شد",
+            10 = "در انتظار تایید پرداخت",
+            100 = "پرداخت تایید شده است",
+            101 = "پرداخت قبلا تایید شده است",
+            200 = "به دریافت کننده واریز شد"
+          ])
+        },
+        trackID:{
+          type:Sequelize.INTEGER
+        },
+        trackLink: {
+          type:Sequelize.STRING
+        },
+        amount:{
+          allowNull:true,
+          type:Sequelize.INTEGER
+        },
+        paymentDate:{
+          type:Sequelize.DATE
+        },
+        description:{
+            allowNull:true,
+            type:Sequelize.STRING
+        },
+        UserId: {
           type: Sequelize.INTEGER,
           references: {
             model: {
-              tableName: 'Customers',
+              tableName: 'Users',
             },
             key: 'id',
             onUpdate: 'CASCADE',
             onDelete: 'CASCADE'
           }
         },
-        amount:{
-          allowNull:true,
-          type:Sequelize.INTEGER
-      },
-      paymentDate:{
-          allowNull:false,
-          type:Sequelize.DATE
-      },
-      description:{
-          allowNull:true,
-          type:Sequelize.STRING
-      },
-      status:{
-          allowNull:false,
-          type:Sequelize.ENUM(["PaymentComplete",
-              "PaymentDeclined",
-              "PaymentDue",
-              "PaymentPastDue"])
-      },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        },
-        updatedAt: {
-          allowNull: false,
-          type: Sequelize.DATE
+        OrderId: {
+          type: Sequelize.INTEGER,
+          references: {
+            model: {
+              tableName: 'Orders',
+            },
+            key: 'id',
+            onUpdate: 'CASCADE',
+            onDelete: 'CASCADE'
+          }
         }
-      });
+        });
 
       // create table productFeatures
       await queryInterface.createTable('ProductFeatures', {
@@ -430,14 +384,6 @@ module.exports = {
         },
         photo: {
           type: Sequelize.STRING
-        },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        },
-        updatedAt: {
-          allowNull: false,
-          type: Sequelize.DATE
         }
       });
 
@@ -479,14 +425,6 @@ module.exports = {
         },
         stock: {
           type: Sequelize.INTEGER
-        },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        },
-        updatedAt: {
-          allowNull: false,
-          type: Sequelize.DATE
         }
       });
 
@@ -514,14 +452,6 @@ module.exports = {
         },
         amount: {
           type: Sequelize.INTEGER
-        },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        },
-        updatedAt: {
-          allowNull: false,
-          type: Sequelize.DATE
         }
       });
 
@@ -546,14 +476,6 @@ module.exports = {
         },
         status: {
           type: Sequelize.ENUM("open","PaymentProcessing","canceled","closed")
-        },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        },
-        updatedAt: {
-          allowNull: false,
-          type: Sequelize.DATE
         }
       });
 
@@ -589,14 +511,6 @@ module.exports = {
         },
         quantity: {
           type: Sequelize.INTEGER
-        },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        },
-        updatedAt: {
-          allowNull: false,
-          type: Sequelize.DATE
         }
       });
 
@@ -631,14 +545,6 @@ module.exports = {
           }
         },
         insertDate: {
-          type: Sequelize.DATE
-        },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        },
-        updatedAt: {
-          allowNull: false,
           type: Sequelize.DATE
         }
       });
@@ -726,15 +632,7 @@ module.exports = {
               "OrderProblem",
               "OrderProcessing",
               "OrderReturned"])
-      },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        },
-        updatedAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        }
+      }
       });
   },
   async down(queryInterface, Sequelize) {

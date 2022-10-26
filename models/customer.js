@@ -9,8 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       Customer.hasMany(models.Cart),
       Customer.hasMany(models.Comment),
       Customer.hasOne(models.FavoriteList),
-      Customer.hasMany(models.Order),
-      Customer.hasMany(models.Payment)
+      Customer.hasMany(models.Order)
     }
   }
   Customer.init({
@@ -27,6 +26,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Customer',
+    timestamps: false
   });
   return Customer;
 };

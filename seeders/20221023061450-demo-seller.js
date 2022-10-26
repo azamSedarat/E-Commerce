@@ -6,16 +6,12 @@ module.exports = {
     return queryInterface.bulkInsert('Sellers', [{
       UserId : 1,
       storeName : "گالری آوینا",
-      qualify : 100,
-      createdAt: new Date(),
-      updatedAt: new Date()
+      qualify : 100
     },
     {
       UserId : 2,
       storeName : "کالالوزی",
-      qualify : 50,
-      createdAt: new Date(),
-      updatedAt: new Date()
+      qualify : 50
     },
   ]);
   },

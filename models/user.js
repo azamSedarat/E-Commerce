@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       User.hasOne(models.Customer),
-      User.hasOne(models.Seller)
+      User.hasOne(models.Seller),
+      User.hasMany(models.Payment)
     }
   }
   User.init({
@@ -33,6 +34,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'User',
+    timestamps: false
   });
   return User;
 };
