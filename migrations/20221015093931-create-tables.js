@@ -171,6 +171,9 @@ module.exports = {
             onDelete: 'CASCADE'
           }
         },
+        qualify :{
+          type: Sequelize.INTEGER
+        },
         sellerType: {
           type: Sequelize.ENUM("person","store")
         },
@@ -196,7 +199,9 @@ module.exports = {
         }
       });
 
-      // create table category
+
+      // create table Category
+
       await queryInterface.createTable("Categories", {
         id: {
           allowNull: false,
@@ -207,22 +212,25 @@ module.exports = {
         name: {
           type: Sequelize.STRING,
         },
-        description: {
-          type: Sequelize.STRING,
-        },
-        superCategory: {
+        parentId : {
           type: Sequelize.INTEGER,
           references: {
             model: {
-              tableName: "Categories",
+              tableName: 'Categories',
             },
-            key: "id",
-            onUpdate: "CASCADE",
-            onDelete: "CASCADE",
-          },
+            key: 'id',
+            onUpdate: 'CASCADE',
+            onDelete: 'CASCADE'
+          }
+        },
+        description: {
+          type: Sequelize.TEXT,
         },
         feature: {
-          type: Sequelize.ARRAY(Sequelize.STRING),
+          type: Sequelize.ARRAY(Sequelize.STRING)
+        },
+        varientFeature: {
+          type: Sequelize.ARRAY(Sequelize.STRING)
         },
         createdAt: {
           allowNull: false,
@@ -245,6 +253,12 @@ module.exports = {
         name: {
           type: Sequelize.STRING
         },
+        EnName: {
+          type: Sequelize.STRING
+        },
+        feature: {
+          type: Sequelize.JSONB
+        },
         CategoryId: {
           type: Sequelize.INTEGER,
           references: {
@@ -255,6 +269,15 @@ module.exports = {
             onUpdate: 'CASCADE',
             onDelete: 'CASCADE'
           }
+        },
+        review: {
+          type: Sequelize.TEXT
+        },
+        expertReview: {
+          type: Sequelize.TEXT
+        },
+        generalFeatures: {
+          type: Sequelize.JSONB
         },
         createdAt: {
           allowNull: false,
@@ -279,6 +302,34 @@ module.exports = {
           references: {
             model: {
               tableName: 'Customers',
+            },
+            key: 'id',
+            onUpdate: 'CASCADE',
+            onDelete: 'CASCADE'
+          }
+        },
+        createdAt: {
+          allowNull: false,
+          type: Sequelize.DATE
+        },
+        updatedAt: {
+          allowNull: false,
+          type: Sequelize.DATE
+        }
+      });
+      // create table favoreiteProduct
+      await queryInterface.createTable('favoriteProducts', {
+        id: {
+          allowNull: false,
+          autoIncrement: true,
+          primaryKey: true,
+          type: Sequelize.INTEGER
+        },
+        FavoriteListId: {
+          type: Sequelize.INTEGER,
+          references: {
+            model: {
+              tableName: 'favoriteLists',
             },
             key: 'id',
             onUpdate: 'CASCADE',
@@ -367,23 +418,18 @@ module.exports = {
           references: {
             model: {
               tableName: 'Products',
+              as : "features"
             },
             key: 'id',
             onUpdate: 'CASCADE',
             onDelete: 'CASCADE'
           }
         },
-        feature: {
+        varientFeature: {
           type: Sequelize.JSONB
-        },
-        price: {
-          type: Sequelize.INTEGER
         },
         photo: {
           type: Sequelize.STRING
-        },
-        stock: {
-          type: Sequelize.INTEGER
         },
         createdAt: {
           allowNull: false,
@@ -403,7 +449,7 @@ module.exports = {
           primaryKey: true,
           type: Sequelize.INTEGER
         },
-        ProductFeaturesId: {
+        ProductFeatureId: {
           type: Sequelize.INTEGER,
           references: {
             model: {
@@ -425,8 +471,14 @@ module.exports = {
             onDelete: 'CASCADE'
           }
         },
-        quantity:{
+        warranty: {
+          type: Sequelize.STRING
+        },
+        price:{
           type : Sequelize.INTEGER
+        },
+        stock: {
+          type: Sequelize.INTEGER
         },
         createdAt: {
           allowNull: false,
@@ -524,7 +576,7 @@ module.exports = {
             onDelete: 'CASCADE'
           }
         },
-        ProductFeaturesId: {
+        ProductFeatureId: {
           type: Sequelize.INTEGER,
           references: {
             model: {
@@ -556,7 +608,7 @@ module.exports = {
           primaryKey: true,
           type: Sequelize.INTEGER
         },
-        ProductFeaturesId: {
+        ProductFeatureId: {
           type: Sequelize.INTEGER,
           references: {
             model: {
