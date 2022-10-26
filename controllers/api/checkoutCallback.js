@@ -1,6 +1,7 @@
 const axios = require("axios").default;
 const dotenv = require('dotenv')
 dotenv.config()
+const  {updatePaymentService } = require('../../services');
 
 const callback = async (req, res) => {
   try {
@@ -22,10 +23,9 @@ const callback = async (req, res) => {
       let verifyBuy = await axios(params);
 
       if (verifyBuy.data.status == 100) {
-        return res.json({
-          message: "تراکنش موفق",
-          peymnet: verifyBuy.data.payment,
-        });
+        updatePaymentService.updatePayment(currentPayment, requestBuy);
+        return res.render("checkout-successful", {verifyBuy})
+
       }
 
       if (verifyBuy.data.status == 101) {
@@ -34,7 +34,8 @@ const callback = async (req, res) => {
           peymnet: verifyBuy.data.payment,
         });
       } else {
-        res.json(req.body);
+        return res.render("checkout-unsuccessful", {verifyBuy})
+
       }
     } else {
       res.json({ message: "پرداخت ناموفق", peyment: req.body });

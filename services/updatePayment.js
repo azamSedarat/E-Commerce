@@ -1,21 +1,15 @@
-const db = require("../../models");
-const {Payment} = db
-const getPayment = async (userId)=> {
+const updatePayment = async (payment, data)=> {
     try {
-        return currentPayment= await Payment.findOne({
-            where:{
-                UserId : userId,
-                status: null
-            },
-             include:{
-                model: db.User,
-                attributes: ['firstName','lastName','phoneNumber','email']
-              }
-            })
+        if(data.link){
+            payment.update({ trackId: data.id, trackLink : data.link} )
+        }
+        else{
+            
+        }
     } catch (error) {
         throw error
     }
 }
 module.exports = {
-    getPayment
+    updatePayment
 }

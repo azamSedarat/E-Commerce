@@ -1,9 +1,9 @@
 const axios = require("axios").default;
 const dotenv = require('dotenv')
 dotenv.config()
-const {getPayment}=require("../../services/userPayment")
+const  { getPaymentService , updatePaymentService } = require('../../services');
 
-const currentPayment = getPayment(1)
+const currentPayment = getPaymentService.getPayment(1)
 
 const createTransaction = async (req, res) => {
   try {
@@ -16,7 +16,7 @@ const createTransaction = async (req, res) => {
         "X-SANDBOX": 1,
       },
       data: {
-        'order_id': `${currentPayment.id}`,
+        'order_id': `${currentPayment.Orders.id}`,
         'amount': currentPayment.amount,
         'name': `${currentPayment.users.firstName} ${currentPayment.users.lastName}`,
         'phone': `${currentPayment.users.phoneNumber}`,
@@ -27,8 +27,9 @@ const createTransaction = async (req, res) => {
     }
 
     let requestBuy = await axios(params);
+    updatePaymentService.updatePayment(currentPayment, requestBuy);
     res.redirect(requestBuy.data.link);
-
+    
   } catch (err) {
     if (err) {
       return res.status(400).send(err.response.data);
