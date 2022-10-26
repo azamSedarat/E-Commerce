@@ -10,7 +10,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Payment.init({
-    id :  DataTypes.INTEGER,
     status : DataTypes.ENUM("pending","in progress","complete","failed"),
     trackID :  DataTypes.INTEGER,
     trackLink : DataTypes.STRING,
@@ -20,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Payment',
+    timestamps: false
   });
   return Payment;
 };
