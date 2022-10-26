@@ -7,13 +7,13 @@ const register = async(req, res) => {
     try {
         const user = await db.User.findOne({
             where: {
-                username: req.body.username
+                userName: req.body.username
             }
         })
         if(user){
             return res.status(400).send({
                 status: "error",
-                message: "hamchin useri darim",
+                message: "this user is exst",
                 data: null
             })
         }

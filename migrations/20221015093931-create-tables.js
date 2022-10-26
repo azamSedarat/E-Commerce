@@ -34,9 +34,6 @@ module.exports = {
       phoneNumber: {
         type: Sequelize.INTEGER
       },
-      email: {
-        type: Sequelize.STRING
-      },
       nationalityCode: {
         type: Sequelize.INTEGER
       },
@@ -84,534 +81,425 @@ module.exports = {
       }
     });
 
-      // create table customer
-      await queryInterface.createTable('Customers', {
-        id: {
-          allowNull: false,
-          autoIncrement: true,
-          primaryKey: true,
-          type: Sequelize.INTEGER
-        },
-        UserId: {
-          type: Sequelize.INTEGER,
-          references: {
-            model: {
-              tableName: 'Users',
-            },
-            key: 'id',
-            onUpdate: 'CASCADE',
-            onDelete: 'CASCADE'
-          }
-        },
-        credit: {
-          type: Sequelize.INTEGER,
-          defultValue: 0
-        },
-        paybackType: {
-          type: Sequelize.ENUM("Deposit to wallet","Deposit to bank account."),
-        },
-        job: {
-          type: Sequelize.STRING
-        },
-        customerType: {
-          type: Sequelize.ENUM("person","company"),
-          defaultValue:"person"
-        },
-        companyName: {
-          type: Sequelize.STRING
-        },
-        financialNumber: {
-          type: Sequelize.INTEGER
-        },
-        registerIdentity: {
-          type: Sequelize.INTEGER
-        }
-      });
-
-      // create table seller
-      await queryInterface.createTable('Sellers', {
-        id: {
-          allowNull: false,
-          autoIncrement: true,
-          primaryKey: true,
-          type: Sequelize.INTEGER
-        },
-        UserId: {
-          type: Sequelize.INTEGER,
-          references: {
-            model: {
-              tableName: 'Users',
-            },
-            key: 'id',
-            onUpdate: 'CASCADE',
-            onDelete: 'CASCADE'
-          }
-        },
-        qualify :{
-          type: Sequelize.INTEGER
-        },
-        sellerType: {
-          type: Sequelize.ENUM("person","store")
-        },
-        gender: {
-          type: Sequelize.ENUM("male","female")
-        },
-        birthCertificateNumber: {
-          type: Sequelize.INTEGER
-        },
-        storeName: {
-          type: Sequelize.STRING
-        },
-        ibanNumber: {
-          type: Sequelize.STRING
-        }
-      });
-
-
-      // create table Category
-
-      await queryInterface.createTable("Categories", {
-        id: {
-          allowNull: false,
-          autoIncrement: true,
-          primaryKey: true,
-          type: Sequelize.INTEGER,
-        },
-        name: {
-          type: Sequelize.STRING,
-        },
-        parentId : {
-          type: Sequelize.INTEGER,
-          references: {
-            model: {
-              tableName: 'Categories',
-            },
-            key: 'id',
-            onUpdate: 'CASCADE',
-            onDelete: 'CASCADE'
-          }
-        },
-        description: {
-          type: Sequelize.TEXT,
-        },
-        feature: {
-          type: Sequelize.ARRAY(Sequelize.STRING)
-        },
-        varientFeature: {
-          type: Sequelize.ARRAY(Sequelize.STRING)
-        }
-      });
-
-      // create table product
-      await queryInterface.createTable('Products', {
-        id: {
-          allowNull: false,
-          autoIncrement: true,
-          primaryKey: true,
-          type: Sequelize.INTEGER
-        },
-        name: {
-          type: Sequelize.STRING
-        },
-        EnName: {
-          type: Sequelize.STRING
-        },
-        feature: {
-          type: Sequelize.JSONB
-        },
-        CategoryId: {
-          type: Sequelize.INTEGER,
-          references: {
-            model: {
-              tableName: 'Categories',
-            },
-            key: 'id',
-            onUpdate: 'CASCADE',
-            onDelete: 'CASCADE'
-          }
-        },
-        review: {
-          type: Sequelize.TEXT
-        },
-        expertReview: {
-          type: Sequelize.TEXT
-        },
-        generalFeatures: {
-          type: Sequelize.JSONB
-        }
-      });
-
-      // create table favoreitList
-      await queryInterface.createTable('favoriteLists', {
-        id: {
-          allowNull: false,
-          autoIncrement: true,
-          primaryKey: true,
-          type: Sequelize.INTEGER
-        },
-        CustomerId: {
-          type: Sequelize.INTEGER,
-          references: {
-            model: {
-              tableName: 'Customers',
-            },
-            key: 'id',
-            onUpdate: 'CASCADE',
-            onDelete: 'CASCADE'
-          }
-        }
-      });
-      // create table favoreiteProduct
-      await queryInterface.createTable('favoriteProducts', {
-        id: {
-          allowNull: false,
-          autoIncrement: true,
-          primaryKey: true,
-          type: Sequelize.INTEGER
-        },
-        FavoriteListId: {
-          type: Sequelize.INTEGER,
-          references: {
-            model: {
-              tableName: 'favoriteLists',
-            },
-            key: 'id',
-            onUpdate: 'CASCADE',
-            onDelete: 'CASCADE'
-          }
-        },
-        ProductId: {
-          type: Sequelize.INTEGER,
-          references: {
-            model: {
-              tableName: 'Products',
-            },
-            key: 'id',
-            onUpdate: 'CASCADE',
-            onDelete: 'CASCADE'
-          }
-        }
-      });
-
-      // create table payment
-      await queryInterface.createTable('Payments', {
-        id: {
-          allowNull: false,
-          autoIncrement: true,
-          primaryKey: true,
-          type: Sequelize.INTEGER
-        },
-        status:{
-          allowNull:true,
-          type:Sequelize.ENUM([
-            1 = "پرداخت انجام نشده است",
-            2 = "پرداخت ناموفق بوده است",
-            3 = "خطا رخ داده است",
-            4 = "بلوکه شده",
-            5 = "برگشت به پرداخت کننده",
-            6 = "برگشت خورده سیستمی",
-            7 = "انصراف از پرداخت",
-            8 = "به درگاه پرداخت منتقل شد",
-            10 = "در انتظار تایید پرداخت",
-            100 = "پرداخت تایید شده است",
-            101 = "پرداخت قبلا تایید شده است",
-            200 = "به دریافت کننده واریز شد"
-          ])
-        },
-        trackID:{
-          type:Sequelize.INTEGER
-        },
-        trackLink: {
-          type:Sequelize.STRING
-        },
-        amount:{
-          allowNull:true,
-          type:Sequelize.INTEGER
-        },
-        paymentDate:{
-          type:Sequelize.DATE
-        },
-        description:{
-            allowNull:true,
-            type:Sequelize.STRING
-        },
-        UserId: {
-          type: Sequelize.INTEGER,
-          references: {
-            model: {
-              tableName: 'Users',
-            },
-            key: 'id',
-            onUpdate: 'CASCADE',
-            onDelete: 'CASCADE'
-          }
-        },
-        OrderId: {
-          type: Sequelize.INTEGER,
-          references: {
-            model: {
-              tableName: 'Orders',
-            },
-            key: 'id',
-            onUpdate: 'CASCADE',
-            onDelete: 'CASCADE'
-          }
-        }
-        });
-
-      // create table productFeatures
-      await queryInterface.createTable('ProductFeatures', {
-        id: {
-          allowNull: false,
-          autoIncrement: true,
-          primaryKey: true,
-          type: Sequelize.INTEGER
-        },
-        ProductId: {
-          type: Sequelize.INTEGER,
-          references: {
-            model: {
-              tableName: 'Products',
-              as : "features"
-            },
-            key: 'id',
-            onUpdate: 'CASCADE',
-            onDelete: 'CASCADE'
-          }
-        },
-        varientFeature: {
-          type: Sequelize.JSONB
-        },
-        photo: {
-          type: Sequelize.STRING
-        }
-      });
-
-      // create table productSeller
-      await queryInterface.createTable('ProductSellers', {
-        id: {
-          allowNull: false,
-          autoIncrement: true,
-          primaryKey: true,
-          type: Sequelize.INTEGER
-        },
-        ProductFeatureId: {
-          type: Sequelize.INTEGER,
-          references: {
-            model: {
-              tableName: 'ProductFeatures',
-            },
-            key: 'id',
-            onUpdate: 'CASCADE',
-            onDelete: 'CASCADE'
-          }
-        },
-        SellerId: {
-          type: Sequelize.INTEGER,
-          references: {
-            model: {
-              tableName: 'Sellers',
-            },
-            key: 'id',
-            onUpdate: 'CASCADE',
-            onDelete: 'CASCADE'
-          }
-        },
-        warranty: {
-          type: Sequelize.STRING
-        },
-        price:{
-          type : Sequelize.INTEGER
-        },
-        stock: {
-          type: Sequelize.INTEGER
-        }
-      });
-
-      // create table withDraw
-      await queryInterface.createTable('withDraws', {
-        id: {
-          allowNull: false,
-          autoIncrement: true,
-          primaryKey: true,
-          type: Sequelize.INTEGER
-        },
-        SellerId: {
-          type: Sequelize.INTEGER,
-          references: {
-            model: {
-              tableName: 'Sellers',
-            },
-            key: 'id',
-            onUpdate: 'CASCADE',
-            onDelete: 'CASCADE'
-          }
-        },
-        date: {
-          type: Sequelize.DATE
-        },
-        amount: {
-          type: Sequelize.INTEGER
-        }
-      });
-
-      // create table cart
-      await queryInterface.createTable('Carts', {
-        id: {
-          allowNull: false,
-          autoIncrement: true,
-          primaryKey: true,
-          type: Sequelize.INTEGER
-        },
-        CustomerId: {
-          type: Sequelize.INTEGER,
-          references: {
-            model: {
-              tableName: 'Customers',
-            },
-            key: 'id',
-            onUpdate: 'CASCADE',
-            onDelete: 'CASCADE'
-          }
-        },
-        status: {
-          type: Sequelize.ENUM("open","PaymentProcessing","canceled","closed")
-        }
-      });
-
-      // create table cartItems
-      await queryInterface.createTable('CartItems', {
-        id: {
-          allowNull: false,
-          autoIncrement: true,
-          primaryKey: true,
-          type: Sequelize.INTEGER
-        },
-        CartId: {
-          type: Sequelize.INTEGER,
-          references: {
-            model: {
-              tableName: 'Carts',
-            },
-            key: 'id',
-            onUpdate: 'CASCADE',
-            onDelete: 'CASCADE'
-          }
-        },
-        ProductFeatureId: {
-          type: Sequelize.INTEGER,
-          references: {
-            model: {
-              tableName: 'ProductFeatures',
-            },
-            key: 'id',
-            onUpdate: 'CASCADE',
-            onDelete: 'CASCADE'
-          }
-        },
-        quantity: {
-          type: Sequelize.INTEGER
-        }
-      });
-
-      // create table comment
-      await queryInterface.createTable('Comments', {
-        id: {
-          allowNull: false,
-          autoIncrement: true,
-          primaryKey: true,
-          type: Sequelize.INTEGER
-        },
-        ProductFeatureId: {
-          type: Sequelize.INTEGER,
-          references: {
-            model: {
-              tableName: 'ProductFeatures',
-            },
-            key: 'id',
-            onUpdate: 'CASCADE',
-            onDelete: 'CASCADE'
-          }
-        },
-        customerId: {
-          type: Sequelize.INTEGER,
-          references: {
-            model: {
-              tableName: 'Customers',
-            },
-            key: 'id',
-            onUpdate: 'CASCADE',
-            onDelete: 'CASCADE'
-          }
-        },
-        insertDate: {
-          type: Sequelize.DATE
-        }
-      });
-
-      // create table order
-      await queryInterface.createTable('Orders', {
-        id: {
-          allowNull: false,
-          autoIncrement: true,
-          primaryKey: true,
-          type: Sequelize.INTEGER
-        },
-        CustumerId: {
-          type: Sequelize.INTEGER,
-          references: {
-            model: {
-              tableName: 'Customers',
-            },
-            key: 'id',
-            onUpdate: 'CASCADE',
-            onDelete: 'CASCADE'
-          }
-        },
-          AddressId: {
-            type: Sequelize.INTEGER,
-            references: {
-              model: {
-                tableName: 'Addresses',
-              },
-              key: 'id',
-              onUpdate: 'CASCADE',
-              onDelete: 'CASCADE'
-            }
-          },
-          CartId: {
-            type: Sequelize.INTEGER,
-            references: {
-              model: {
-                tableName: 'Carts',
-              },
-              key: 'id',
-              onUpdate: 'CASCADE',
-              onDelete: 'CASCADE'
-            }
-          },
-          PaymentId: {
-            type: Sequelize.INTEGER,
-            references: {
-              model: {
-                tableName: 'Payments',
-              },
-              key: 'id',
-              onUpdate: 'CASCADE',
-              onDelete: 'CASCADE'
-            }
-          },
-        shippedDate: {
-          type: Sequelize.DATE
-        },
-        amount:{
-          allowNull:false,
-          type:Sequelize.INTEGER
+    // create table customer
+    await queryInterface.createTable('Customers', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
       },
-        paymentMethod:{
-          allowNull:false,
-          type: Sequelize.ENUM(["online", "cash","credit"])
-  
+      credit: {
+        type: Sequelize.INTEGER,
+        defultValue: 0
+      },
+      paybackType: {
+        type: Sequelize.ENUM("Deposit to wallet","Deposit to bank account."),
+      },
+      job: {
+        type: Sequelize.STRING
+      },
+      customerType: {
+        type: Sequelize.ENUM("person","company"),
+        defaultValue:"person"
+      },
+      companyName: {
+        type: Sequelize.STRING
+      },
+      financialNumber: {
+        type: Sequelize.INTEGER
+      },
+      registerIdentity: {
+        type: Sequelize.INTEGER
+      },
+      UserId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Users',
+          },
+          key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        }
+      },
+    });
+
+    // create table seller
+    await queryInterface.createTable('Sellers', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      sellerType: {
+        type: Sequelize.ENUM("person","store")
+      },
+      gender: {
+        type: Sequelize.ENUM("male","female")
+      },
+      qualify :{
+        type: Sequelize.INTEGER
+      },
+      birthCertificateNumber: {
+        type: Sequelize.INTEGER
+      },
+      storeName: {
+        type: Sequelize.STRING
+      },
+      ibanNumber: {
+        type: Sequelize.STRING
+      },
+      UserId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Users',
+          },
+          key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        }
+      },
+    });
+
+    // create table Category
+    await queryInterface.createTable("Categories", {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      name: {
+        type: Sequelize.STRING,
+      },
+      description: {
+        type: Sequelize.TEXT,
+      },
+      feature: {
+        type: Sequelize.ARRAY(Sequelize.STRING)
+      },
+      varientFeature: {
+        type: Sequelize.ARRAY(Sequelize.STRING)
+      },
+      parentId : {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Categories',
+          },
+          key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        }
+      },
+    });
+
+    // create table product
+    await queryInterface.createTable('Products', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      name: {
+        type: Sequelize.STRING
+      },
+      EnName: {
+        type: Sequelize.STRING
+      },
+      feature: {
+        type: Sequelize.JSONB
+      },
+      review: {
+        type: Sequelize.TEXT
+      },
+      expertReview: {
+        type: Sequelize.TEXT
+      },
+      generalFeatures: {
+        type: Sequelize.JSONB
+      },
+      CategoryId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Categories',
+          },
+          key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        }
+      }
+    });
+
+    // create table favoreitList
+    await queryInterface.createTable('favoriteLists', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      CustomerId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Customers',
+          },
+          key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        }
+      }
+    });
+
+    // create table favoreiteProduct
+    await queryInterface.createTable('favoriteProducts', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      FavoriteListId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'favoriteLists',
+          },
+          key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        }
+        },
+      ProductId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Products',
+          },
+          key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        }
+      }
+      });
+
+    // create table productFeatures
+    await queryInterface.createTable('ProductFeatures', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      varientFeature: {
+        type: Sequelize.JSONB
+      },
+      photo: {
+        type: Sequelize.STRING
+      },
+      ProductId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Products',
+            as : "features"
+          },
+          key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        }
+      },
+    });
+
+    // create table productSeller
+    await queryInterface.createTable('ProductSellers', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      ProductFeatureId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'ProductFeatures',
+          },
+          key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        }
+      },
+      SellerId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Sellers',
+          },
+          key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        }
+      },
+      warranty: {
+        type: Sequelize.STRING
+      },
+      price:{
+        type : Sequelize.INTEGER
+      },
+      stock: {
+        type: Sequelize.INTEGER
+      }
+    });
+
+    // create table withDraw
+    await queryInterface.createTable('withDraws', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      date: {
+        type: Sequelize.DATE
+      },
+      amount: {
+        type: Sequelize.INTEGER
+      },
+      SellerId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Sellers',
+          },
+          key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        }
+      }
+    });
+
+    // create table cart
+    await queryInterface.createTable('Carts', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      status: {
+        type: Sequelize.ENUM("open","PaymentProcessing","canceled","closed")
+      },
+      CustomerId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Customers',
+          },
+          key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        }
+      }
+    });
+
+    // create table cartItems
+    await queryInterface.createTable('CartItems', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      CartId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Carts',
+          },
+          key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        }
+      },
+      ProductFeatureId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'ProductFeatures',
+          },
+          key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        }
+      },
+      quantity: {
+        type: Sequelize.INTEGER
+      }
+    });
+
+    // create table comment
+    await queryInterface.createTable('Comments', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      text: {
+        type: Sequelize.DATE
+      },
+      insertDate: {
+        type: Sequelize.DATE
+      },
+      ProductId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Products',
+          },
+          key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        }
+      },
+      customerId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Customers',
+          },
+          key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        }
+      }
+    });
+
+    // create table order
+    await queryInterface.createTable('Orders', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      shippedDate: {
+        type: Sequelize.DATE
+      },
+      amount:{
+        allowNull:false,
+        type:Sequelize.INTEGER
+      },
+      paymentMethod:{
+        allowNull:false,
+        type: Sequelize.ENUM(["online", "cash","credit"])
       },
       description:{
           allowNull:true,
@@ -632,6 +520,92 @@ module.exports = {
               "OrderProblem",
               "OrderProcessing",
               "OrderReturned"])
+      },
+      CustumerId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Customers',
+          },
+          key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        }
+      },
+      CartId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Carts',
+          },
+          key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        }
+      },
+      AddressId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Addresses',
+          },
+          key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        }
+      },
+      });
+
+    // create table payment
+    await queryInterface.createTable('Payments', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      status:{
+        allowNull:true,
+        type:Sequelize.ENUM("pending","in progress","complete","failed")
+      },
+      trackID:{
+        type:Sequelize.INTEGER
+      },
+      trackLink: {
+        type:Sequelize.STRING
+      },
+      amount:{
+        allowNull:true,
+        type:Sequelize.INTEGER
+      },
+      paymentDate:{
+        type:Sequelize.DATE
+      },
+      description:{
+          allowNull:true,
+          type:Sequelize.STRING
+      },
+      UserId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Users',
+          },
+          key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        }
+      },
+      OrderId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Orders',
+          },
+          key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        }
       }
       });
   },
