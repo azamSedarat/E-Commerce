@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       Product.hasMany(models.ProductFeature),
       Product.hasMany(models.Comment),   
       Product.belongsToMany(models.FavoriteList, {through: 'favoriteProduct'})
+
     }
   }
   Product.init({
@@ -18,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     review: DataTypes.TEXT,
     expertReview: DataTypes.TEXT,
     generalFeatures: DataTypes.JSONB
+
   }, {
     sequelize,
     modelName: 'Product',
