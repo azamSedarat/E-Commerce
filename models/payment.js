@@ -15,12 +15,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Payment.init({
-    ID: DataTypes.STRING,
-    link: DataTypes.STRING,
-    paymentDate: DataTypes.DATE
+    id :  DataTypes.INTEGER,
+    status : DataTypes.INTEGER,
+    track_id :  DataTypes.INTEGER,
+    amount :  DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Payment',
+    timestamps: false
   });
   return Payment;
 };

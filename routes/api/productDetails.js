@@ -3,7 +3,7 @@ const  { productViewAPI } = require('../../controllers');
 const router = express.Router()
 
 
-router.get("/status", checkoutViewAPI.paymentStatus)
+router.get("/:productId", productViewAPI.getProductDetails)
 
 
 module.exports = router;

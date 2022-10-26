@@ -42,14 +42,6 @@ module.exports = {
       },
       birthDay: {
         type: Sequelize.DATE
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
       }
     });
 
@@ -89,14 +81,6 @@ module.exports = {
           onUpdate: 'CASCADE',
           onDelete: 'CASCADE'
         }
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
       }
     });
 
@@ -141,14 +125,6 @@ module.exports = {
         },
         registerIdentity: {
           type: Sequelize.INTEGER
-        },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        },
-        updatedAt: {
-          allowNull: false,
-          type: Sequelize.DATE
         }
       });
 
@@ -188,14 +164,6 @@ module.exports = {
         },
         ibanNumber: {
           type: Sequelize.STRING
-        },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        },
-        updatedAt: {
-          allowNull: false,
-          type: Sequelize.DATE
         }
       });
 
@@ -231,15 +199,7 @@ module.exports = {
         },
         varientFeature: {
           type: Sequelize.ARRAY(Sequelize.STRING)
-        },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE,
-        },
-        updatedAt: {
-          allowNull: false,
-          type: Sequelize.DATE,
-        },
+        }
       });
 
       // create table product
@@ -278,14 +238,6 @@ module.exports = {
         },
         generalFeatures: {
           type: Sequelize.JSONB
-        },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        },
-        updatedAt: {
-          allowNull: false,
-          type: Sequelize.DATE
         }
       });
 
@@ -307,14 +259,6 @@ module.exports = {
             onUpdate: 'CASCADE',
             onDelete: 'CASCADE'
           }
-        },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        },
-        updatedAt: {
-          allowNull: false,
-          type: Sequelize.DATE
         }
       });
       // create table favoreiteProduct
@@ -346,14 +290,6 @@ module.exports = {
             onUpdate: 'CASCADE',
             onDelete: 'CASCADE'
           }
-        },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        },
-        updatedAt: {
-          allowNull: false,
-          type: Sequelize.DATE
         }
       });
 
@@ -364,6 +300,23 @@ module.exports = {
           autoIncrement: true,
           primaryKey: true,
           type: Sequelize.INTEGER
+        },
+        status:{
+          allowNull:true,
+          type:Sequelize.ENUM(["PaymentComplete",
+              "PaymentDeclined",
+              "PaymentDue",
+              "PaymentPastDue"])
+        },
+        trackID:{
+          type:Sequelize.STRING
+        },
+        tracklink: {
+          type:Sequelize.STRING
+        },
+        amount:{
+          allowNull:true,
+          type:Sequelize.INTEGER
         },
         UserId: {
           type: Sequelize.INTEGER,
@@ -376,16 +329,7 @@ module.exports = {
             onDelete: 'CASCADE'
           }
         },
-        ID:{
-          type:Sequelize.STRING
-        },
-        link: {
-          type:Sequelize.STRING
-        },
-        amount:{
-          allowNull:true,
-          type:Sequelize.INTEGER
-        },
+
         paymentDate:{
             allowNull:false,
             type:Sequelize.DATE
@@ -393,22 +337,7 @@ module.exports = {
         description:{
             allowNull:true,
             type:Sequelize.STRING
-        },
-        status:{
-            allowNull:true,
-            type:Sequelize.ENUM(["PaymentComplete",
-                "PaymentDeclined",
-                "PaymentDue",
-                "PaymentPastDue"])
-        },
-          createdAt: {
-            allowNull: false,
-            type: Sequelize.DATE
-          },
-          updatedAt: {
-            allowNull: false,
-            type: Sequelize.DATE
-          }
+        }
         });
 
       // create table productFeatures
@@ -436,14 +365,6 @@ module.exports = {
         },
         photo: {
           type: Sequelize.STRING
-        },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        },
-        updatedAt: {
-          allowNull: false,
-          type: Sequelize.DATE
         }
       });
 
@@ -485,14 +406,6 @@ module.exports = {
         },
         stock: {
           type: Sequelize.INTEGER
-        },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        },
-        updatedAt: {
-          allowNull: false,
-          type: Sequelize.DATE
         }
       });
 
@@ -520,14 +433,6 @@ module.exports = {
         },
         amount: {
           type: Sequelize.INTEGER
-        },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        },
-        updatedAt: {
-          allowNull: false,
-          type: Sequelize.DATE
         }
       });
 
@@ -552,14 +457,6 @@ module.exports = {
         },
         status: {
           type: Sequelize.ENUM("open","PaymentProcessing","canceled","closed")
-        },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        },
-        updatedAt: {
-          allowNull: false,
-          type: Sequelize.DATE
         }
       });
 
@@ -595,14 +492,6 @@ module.exports = {
         },
         quantity: {
           type: Sequelize.INTEGER
-        },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        },
-        updatedAt: {
-          allowNull: false,
-          type: Sequelize.DATE
         }
       });
 
@@ -637,14 +526,6 @@ module.exports = {
           }
         },
         insertDate: {
-          type: Sequelize.DATE
-        },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        },
-        updatedAt: {
-          allowNull: false,
           type: Sequelize.DATE
         }
       });
@@ -732,15 +613,7 @@ module.exports = {
               "OrderProblem",
               "OrderProcessing",
               "OrderReturned"])
-      },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        },
-        updatedAt: {
-          allowNull: false,
-          type: Sequelize.DATE
-        }
+      }
       });
   },
   async down(queryInterface, Sequelize) {

@@ -4,4 +4,6 @@ exports.authTemplate = require("./view/register")
 
 exports.productViewAPI = require("./view/productDetails")
 
-exports.checkoutViewAPI = require("./view/checkoutResponse")
+exports.checkoutAPI = require("./api/checkout")
+
+exports.checkoutCallbackAPI = require("./api/checkoutCallback")
