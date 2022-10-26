@@ -14,11 +14,12 @@ const routeAPIDefiner = [
 
 const routeViewsDefiner = [
     ["/view", require("./view/register")],
+    ["/auth", require("./view/login")],
+    ["/home", require("./view/productList")],
     ["/product", require("./view/productDetails")],
-    ["/auth", require("./view/register")]
+    ["/auth", require("./view/register")],
+    ["/checkout", require("./api/checkout")],
     ["/checkout", require("./api/checkout")]
-    ["/checkout", require("./api/checkout")]
-
 ]
 
 for(const route of routeAPIDefiner){
