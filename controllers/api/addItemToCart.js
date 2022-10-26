@@ -1,5 +1,5 @@
 const cartRouter = require("router");
-router.post("/cart", Auth, async(req, res) => {
+ async(req, res) => {
     const owner = req.user.username;
     const { productId, quantity } = req.body;
     try {

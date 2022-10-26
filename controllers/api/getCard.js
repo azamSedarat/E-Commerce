@@ -1,11 +1,4 @@
-const express = require("express");
-const Cart = require("../models/cartitems");
-const Product = require("../models/product");
-const Auth = require("../middlewares/authentication");
-
-const router = express.Router()
-
-router.get("/cart", Auth, async(req, res) => {
+ const getCart = async(req, res) => {
     const owner = req.user.username; // useri ke mahsul search mikone
     try {
         const cart = await Cart.findOne({ owner });
@@ -22,5 +15,8 @@ router.get("/cart", Auth, async(req, res) => {
             data: null
         })
     }
-});
-module.exports = router;
+}
+
+module.exports = {
+    getCart
+  }

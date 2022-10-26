@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Comment.init({
     text : DataTypes.STRING,
-    insertDate:  DATE
+    insertDate:  DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Comment',
