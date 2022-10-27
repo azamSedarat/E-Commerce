@@ -1,8 +1,8 @@
-const db = require("../models");
-const {Payment} = db
+const db = require("../../models");
+
 const getPayment = async (userId)=> {
     try {
-        return currentPayment= await Payment.findOne({
+        const payment= await db.Payment.findOne({
             where:{
                 UserId : userId,
                 status: null
@@ -12,10 +12,12 @@ const getPayment = async (userId)=> {
                 attributes: ['firstName','lastName','phoneNumber','email']
               }
             })
+        return payment
     } catch (error) {
         throw error
     }
 }
+
 module.exports = {
     getPayment
 }
