@@ -1,4 +1,4 @@
-const db = require("../../models");
+const db = require("../models");
 const {Payment} = db
 const getPayment = async (userId)=> {
     try {
