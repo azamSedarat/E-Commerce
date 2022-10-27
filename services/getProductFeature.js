@@ -1,4 +1,4 @@
-const db = require("../../models")
+const db = require("../models")
 
 const getProductFeature = async (productFeatureId, sellerId)=> {
     try {

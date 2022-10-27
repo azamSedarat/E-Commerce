@@ -1,4 +1,4 @@
-const db = require("../../models");
+const db = require("../models")
 
 const getProduct = async (productId)=> {
     try {
