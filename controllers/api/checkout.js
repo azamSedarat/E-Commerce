@@ -12,7 +12,7 @@ const createTransaction = async (req, res) => {
       url: "https://api.idpay.ir/v1.1/payment",
       headers: {
         'Content-Type': 'application/json',
-        "X-API-KEY": process.env.API_KEY,
+        "X-API-KEY": `${process.env.API_KEY}`,
         "X-SANDBOX": 1,
       },
       data: {
