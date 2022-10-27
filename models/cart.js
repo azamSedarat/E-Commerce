@@ -12,7 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     
   }
   Cart.init({
-    status: DataTypes.ENUM("open","PaymentProcessing","canceled","closed")
+    status: {
+      type : DataTypes.ENUM("open","PaymentProcessing","canceled","closed"),
+      defaultValue:"open"
+    }
   }, {
     sequelize,
     modelName: 'Cart',

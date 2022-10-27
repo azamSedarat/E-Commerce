@@ -6,7 +6,7 @@ exports.productViewAPI = require("./view/productDetails")
 
 exports.checkoutAPI = require("./api/checkout")
 
-exports.checkoutCallbackAPI = require("./api/checkoutCallback")
+exports.checkoutVerifyAPI = require("./api/checkoutVerify")
 
 exports.addItemToCartAPI = require("./api/addItemToCart")
 

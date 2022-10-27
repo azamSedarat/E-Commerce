@@ -1,10 +1,10 @@
 const express = require("express");
-const  { checkoutAPI , checkoutCallbackAPI } = require('../../controllers');
+const  { checkoutAPI , checkoutVerifyAPI } = require('../../controllers');
 const router = express.Router()
 
 
 router.use("/buy", checkoutAPI.createTransaction)
-router.post("/callback", checkoutCallbackAPI.callback)
+router.post("/callback", checkoutVerifyAPI.callback)
 
 
 module.exports = router;

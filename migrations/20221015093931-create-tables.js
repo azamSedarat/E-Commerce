@@ -394,7 +394,8 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       status: {
-        type: Sequelize.ENUM("open","PaymentProcessing","canceled","closed")
+        type: Sequelize.ENUM("open","PaymentProcessing","canceled","closed"),
+        defaultValue : "open"
       },
       CustomerId: {
         type: Sequelize.INTEGER,

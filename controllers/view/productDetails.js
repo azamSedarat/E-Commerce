@@ -1,29 +1,18 @@
-const db = require("../../models");
-const {Op} = require("sequelize");
-const { sequelize } = require("../../models");
+const  { getProductService, getCategoryService } = require('../../services');
+
 const getProductDetails= async(req, res) => {
     try {
 
-        const product= await db.Product.findByPk(req.params.productId,{
-             include:{
-                model: db.ProductFeature,
-                attributes: ['id','varientFeature','photo'],
-                include:{
-                    model: db.Seller,
-                    attributes: ['id','qualify','storeName'],
-                  }
-              }
-            })
+        const product= getProductService.getProduct(req.params.productId)
             
-        const category = await db.Category.findByPk(product.CategoryId, {attributes :["name"]})
+        const category = getCategoryService.getCategory(product.categoryId)
+
         res.render("productDetails", {product,category})
     } catch (error) {
         
         res.send(error.message)
     }
 }
-
-
 
 module.exports = {
     getProductDetails

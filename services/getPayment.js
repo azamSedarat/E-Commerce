@@ -1,8 +1,8 @@
 const db = require("../../models");
-const {Payment} = db
+
 const getPayment = async (userId)=> {
     try {
-        return currentPayment= await Payment.findOne({
+        return currentPayment= await db.Payment.findOne({
             where:{
                 UserId : userId,
                 status: null
