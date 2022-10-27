@@ -1,4 +1,4 @@
-const  { getCartService, getProductFeatureService, addItemToCartService } = require('../../');
+const  { getCartService, getProductFeatureService, addItemToCartService } = require('../../services');
 
 const addItem = async(req, res) => {
     const currentCart = getCartService.getCart(req.customerId)
