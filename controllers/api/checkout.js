@@ -27,9 +27,9 @@ const createTransaction = async (req, res) => {
     }
 
     let requestBuy = await axios(params);
-    updatePaymentService.updatePayment(currentPayment, requestBuy);
+    await updatePaymentService.updatePayment(currentPayment, requestBuy);
     res.redirect(requestBuy.data.link);
-    
+
   } catch (err) {
     if (err) {
       return res.status(400).send(err.response.data);
