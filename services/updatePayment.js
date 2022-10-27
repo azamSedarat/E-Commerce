@@ -10,6 +10,7 @@ const updatePayment = async (payment, data)=> {
         throw error
     }
 }
+
 module.exports = {
     updatePayment
 }

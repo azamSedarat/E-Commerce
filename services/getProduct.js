@@ -2,7 +2,7 @@ const db = require("../../models");
 
 const getProduct = async (productId)=> {
     try {
-        return currentproduct = await db.Product.findByPk(productId,{
+        const product = await db.Product.findByPk(productId,{
             include:{
             model: db.ProductFeature,
             attributes: ['id','varientFeature','photo'],
@@ -12,8 +12,12 @@ const getProduct = async (productId)=> {
                 }
             }
         })
-        
+        return product
     } catch (error) {
         throw error
     }
+}
+
+module.exports = {
+    getProduct
 }

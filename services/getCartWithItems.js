@@ -1,4 +1,5 @@
-const db = require("../../models");
+const db = require("../../models")
+
 const getCart = async (customerId)=> {
     try {
         const [cart, created] = await db.Cart.findOrCreate({
@@ -10,7 +11,7 @@ const getCart = async (customerId)=> {
                 model: db.ProductFeature
               }
           });
-          return cart;
+        return cart;
     } catch (error) {
         throw error
     }
