@@ -1,6 +1,4 @@
-exports.registerViewAPI = require("./view/register")
-
-exports.loginViewAPI = require("./view/loginAndLogout")
+exports.userController = require("./view/auth")
 
 exports.productDetailsViewAPI = require("./view/productDetails")
 

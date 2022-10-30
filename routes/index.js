@@ -13,9 +13,8 @@ const routeAPIDefiner = [
 ]
 
 const routeViewsDefiner = [
-    ["/auth", require("./view/register")],
+    ["/auth", require("./view/auth")],
     ["/cart", require("./view/cartDetails")],
-    ["/auth", require("./view/loginAndLogout")],
     ["/product", require("./view/productDetails")],
     ["/product", require("./view/productList")]
 ]
