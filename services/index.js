@@ -1,6 +1,4 @@
-exports.createUserService = require("./createUser")
-
-exports.getUserService = require("./getUser")
+exports.userService = require("./UserService")
 
 exports.getProductService = require("./getProduct")
 
