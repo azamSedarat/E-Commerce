@@ -1,4 +1,4 @@
-exports.userController = require("./view/auth")
+exports.userController = require("./api/UserController")
 
 exports.productDetailsViewAPI = require("./view/productDetails")
 

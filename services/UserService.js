@@ -18,16 +18,21 @@ class UserService {
                 userRole:"customer"
               }
         })
-        return created
+        if(!created){
+            throw new Error("this username is unavailable");
+        }
+        else{
+            return user
+        }
     }
 
-    async login(username) {
+    async login(userData) {
         const user = await db.User.findOne({
             where: {
-                userName: username
+                userName: userData.username
             }
         })
-        const validPassword = await bcrypt.compare(req.body.password, user.password);
+        const validPassword = await bcrypt.compare(userData.password, user.password);
         if(!user){
             throw new Error("this user not exist");
         }
@@ -37,11 +42,6 @@ class UserService {
         }else{
             throw new Error("password is incorrect");
         }
-    }
-  
-    async logout() {
-        res.clearCookie("access-token");
-        return res.render("index", { req })
     }
   }
   module.exports = new UserService();
