@@ -1,11 +1,11 @@
 const db = require("../models")
 
 class PaymentService {
-    async getOrCreatePayment(userData){
+    getOrCreatePayment(userData){
         const [payment, created] = db.Payment.findOrCreate({
             where: { 
                 UserId : userData.userId,
-                status: "pending"
+                status: "pending" | "in progress"
             },
             include: db.User,
             defaults: {
@@ -19,7 +19,8 @@ class PaymentService {
         })
         return payment
     }
-    async updatePayment(payment, data){
+
+    updatePayment(payment, data){
         if(data.link){
             payment.update({ trackId: data.id, trackLink : data.link})
         }
