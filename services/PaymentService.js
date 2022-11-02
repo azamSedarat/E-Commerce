@@ -13,7 +13,7 @@ class PaymentService {
               }
             })
         }
-    async updaatePayment(payment, data){
+    async updatePayment(payment, data){
         if(data.link){
             payment.update({ trackId: data.id, trackLink : data.link})
         }
