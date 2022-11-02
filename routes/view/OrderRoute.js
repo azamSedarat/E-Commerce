@@ -1,8 +1,8 @@
 const express = require("express");
-const  { ordersListViewAPI } = require('../../controllers');
+const  { orderController } = require('../../controllers');
 const router = express.Router()
 const Auth = require("../middlewares/authentication");
 
-router.get("/list", Auth, ordersListViewAPI.getOrders)
+router.get("/list", Auth, orderController.getOrders())
 
 module.exports = router;
