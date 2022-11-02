@@ -9,7 +9,7 @@ const addItem = async(req, res) => {
             res.status(404).send({ message: "item not found" })
             return;
         }
-        addItemToCartService.addOrUpdateCartItems(currentCart,currentProductFeature,req)
+        await addItemToCartService.addOrUpdateCartItems(currentCart,currentProductFeature,req)
         res.status(200).send("registered");
     } catch (error) {
         res.status(500).send("something went wrong");

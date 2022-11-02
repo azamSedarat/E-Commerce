@@ -6,7 +6,7 @@ const  {updatePaymentService } = require('../../services');
 const callback = async (req, res) => {
   try {
 
-    if (req.body.status == 10) {
+    if (req.body.status === 10) {
       let params = {
         headers: {
           "X-API-KEY": process.env.API_KEY,
