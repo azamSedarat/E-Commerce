@@ -1,6 +1,6 @@
 const {userService} =  require("../../services")
 
-export class UserController {
+class UserController {
 
   async register(req, res) {
     try {
