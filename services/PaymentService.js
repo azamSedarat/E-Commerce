@@ -1,18 +1,24 @@
 const db = require("../models")
 
 class PaymentService {
-    async getPayment(userId){
-        return payment= await db.Payment.findOne({
-            where:{
-                UserId : userId,
-                status: null
+    async getOrCreatePayment(userData){
+        const [payment, created] = db.Payment.findOrCreate({
+            where: { 
+                UserId : userData.userId,
+                status: "pending"
             },
-             include:{
-                model: db.User,
-                attributes: ['firstName','lastName','phoneNumber','email']
-              }
-            })
-        }
+            include: db.User,
+            defaults: {
+                UserId : userData.userId,
+                OrderId : userData.orderId,
+                status : "in progress",
+                amount : userData.amount,
+                paymentDate : Date.now(),
+                description : userData.description
+            }
+        })
+        return payment
+    }
     async updatePayment(payment, data){
         if(data.link){
             payment.update({ trackId: data.id, trackLink : data.link})
