@@ -9,7 +9,7 @@ app.use(cookieParser());
 
 const routeAPIDefiner = [
     ["/addItem", require("./api/addToCart")],
-    ["/payment", require("./api/checkout")],
+    ["/payment", require("./api/CheckoutRoute")],
 ]
 
 const routeViewsDefiner = [
