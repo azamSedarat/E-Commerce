@@ -2,9 +2,9 @@ exports.userController = require("./api/UserController")
 
 exports.productController = require("./view/ProductController")
 
-exports.checkoutAPI = require("./api/checkout")
+exports.checkoutController = require("./api/CheckoutController")
 
-exports.checkoutVerifyAPI = require("./api/checkoutVerify")
+exports.checkoutVerifyController = require("./api/CheckoutVerifyController")
 
 exports.orderController = require("./view/OrderController")
 
