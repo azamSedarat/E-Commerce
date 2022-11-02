@@ -1,7 +1,20 @@
 const db = require("../models")
 
-const getProductFeature = async (productFeatureId, sellerId)=> {
-    try {
+class ProductService {
+    async getProduct(productId) {
+        return product = await db.Product.findByPk(productId,{
+            include:{
+            model: db.ProductFeature,
+            attributes: ['id','varientFeature','photo'],
+            include:{
+                model: db.Seller,
+                attributes: ['id','qualify','storeName'],
+                }
+            }
+        })
+    }
+
+    async getProductFeature(productFeatureId, sellerId) {
         if(sellerId){
             const productFeature= await db.ProductFeature.findByPk(productFeatureId,{
                 attributes: ['id','varientFeature','photo'],
@@ -21,11 +34,8 @@ const getProductFeature = async (productFeatureId, sellerId)=> {
               })
               return productFeature
         }
-    } catch (error) {
-        throw error
     }
-}
+  }
 
-module.exports = {
-    getProductFeature
-}
+  module.exports = new ProductService();
+  
