@@ -1,6 +1,6 @@
 const {orderService} =  require("../../services")
 
-export class OrderController {
+class OrderController {
 
   async getOrders(req, res) {
     try {

@@ -9,3 +9,5 @@ exports.checkoutVerifyAPI = require("./api/checkoutVerify")
 exports.orderController = require("./view/OrderController")
 
 exports.addItemToCartAPI = require("./api/addItemToCart")
+
+exports.cartDetailsViewAPI = require("./view/cartDetails")

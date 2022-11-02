@@ -1,12 +1,12 @@
 const axios = require("axios").default;
 const dotenv = require('dotenv')
 dotenv.config()
-const  { getPaymentService , updatePaymentService } = require('../../services');
+const  { paymentService} = require('../../services');
 
 
 const createTransaction = async (req, res) => {
   try {
-    const currentPayment = getPaymentService.getPayment(1)
+    const currentPayment = paymentService.getPayment(1)
     let params = {
       method: "post",
       url: "https://api.idpay.ir/v1.1/payment",
@@ -27,7 +27,7 @@ const createTransaction = async (req, res) => {
     }
 
     let requestBuy = await axios(params);
-    await updatePaymentService.updatePayment(currentPayment, requestBuy);
+    await paymentService.updatePayment(currentPayment, requestBuy);
     res.redirect(requestBuy.data.link);
 
   } catch (err) {

@@ -1,12 +1,11 @@
 const {productService} =  require("../../services")
 
-export class ProductController {
+class ProductController {
 
   async getProductDetails(req, res) {
     try {
 
         const product= productService.getProduct(req.params.productId)
-            
         const category = productService.getCategory(product.categoryId)
 
         res.render("productDetails", {product,category})

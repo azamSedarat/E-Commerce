@@ -1,7 +1,7 @@
 const axios = require("axios").default;
 const dotenv = require('dotenv')
 dotenv.config()
-const  {updatePaymentService } = require('../../services');
+const  {paymentService } = require('../../services');
 
 const callback = async (req, res) => {
   try {
@@ -23,7 +23,7 @@ const callback = async (req, res) => {
       let verifyBuy = await axios(params);
 
       if (verifyBuy.data.status == 100) {
-        updatePaymentService.updatePayment(currentPayment, requestBuy);
+        paymentService.updatePayment(currentPayment, requestBuy);
         return res.render("checkout-successful", {verifyBuy})
 
       }
