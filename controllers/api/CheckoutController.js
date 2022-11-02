@@ -15,23 +15,21 @@ class CheckoutController {
                 "X-SANDBOX": 1,
               },
               data: {
-                'order_id': `${activePayment.OrderId}`,
+                'order_id': activePayment.OrderId,
                 'amount': activePayment.amount,
-                'name': `${activePayment.users.firstName} ${activePayment.users.lastName}`,
-                'phone': `${activePayment.users.phoneNumber}`,
-                'mail': activePayment.users.email,
+                'name': `${activePayment.Users.firstName} ${activePayment.Users.lastName}`,
+                'phone': `${activePayment.Users.phoneNumber}`,
+                'mail': activePayment.Users.email,
                 'desc': activePayment.description,
                 'callback': "localhost:3000/payment/callback"
               }
             }
-        
             let requestBuy = await axios(params);
-        
             await paymentService.updatePayment(activePayment, requestBuy);
-            res.redirect(requestBuy.data.link);
+            res.redirect(requestBuy.body.link);
         
           } catch (err) {
-            return res.render("error", { errors: err.response.data})
+            return res.render("error", { err})
           }
     }
 
